@@ -46,7 +46,7 @@ async def on_message(message):
     if '返事して' in message.content:
         msg = '了解っす'
         oumu_flag = 'On'
-        await = message.channel.send(msg)
+        await message.channel.send(msg)
 
     if 'Hello' in message.content or '御中くんこんにちは':
         print(message.author.name)
