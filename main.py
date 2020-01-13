@@ -15,7 +15,7 @@ read_flag = 'Off'
 oumu_flag = 'Off'
 pc_list = file_cont.chara_lister()
 status_flag = 'No Status'
-status_list = ['STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU', 'HP', 'MP', 'SAN', 'idea', '幸運', '知識']
+status_list = ['full', 'STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU', 'HP', 'MP', 'SAN', 'idea', '幸運', '知識']
 
 @client.event
 async def on_ready():
@@ -72,7 +72,7 @@ async def on_message(message):
             print(chara_data)
             ext_chara = file_cont.chara_data_extracter()
             await message.channel.send('以下のキャラデータを保存しました')
-            await message.channel.send(file_cont.chara_data_output(ext_chara['name']))
+            await message.channel.send(file_cont.chara_data_output(ext_chara['name'], 'full'))
             pc_list.append(ext_chara['name'])
             print(pc_list)
             read_flag = 'Off'
@@ -101,5 +101,5 @@ async def on_message(message):
         await message.channel.send(file_cont.chara_data_output(name_flag, status_flag))
         status_flag = 'No Status'
 
-client.run("")
+client.run("NjY1ODA4MTAxOTUzNTAzMjQy.XhwUPg.bSlDX7fgnRpYHJ3Yqi59Ul5iyu4")
 
