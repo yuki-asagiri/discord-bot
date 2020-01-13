@@ -101,5 +101,5 @@ async def on_message(message):
         await message.channel.send(file_cont.chara_data_output(name_flag, status_flag))
         status_flag = 'No Status'
 
-client.run("NjY1ODA4MTAxOTUzNTAzMjQy.XhwUPg.bSlDX7fgnRpYHJ3Yqi59Ul5iyu4")
+client.run("")
 
