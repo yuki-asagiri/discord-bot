@@ -48,7 +48,7 @@ async def on_message(message):
         oumu_flag = 'On'
         await message.channel.send(msg)
 
-    if 'Hello' in message.content or '御中くんこんにちは':
+    if 'Hello' in message.content:
         print(message.author.name)
         msg = "こんにちはっす" + message.author.name + "さん"
         await message.channel.send(msg)
@@ -101,5 +101,5 @@ async def on_message(message):
         await message.channel.send(file_cont.chara_data_output(name_flag, status_flag))
         status_flag = 'No Status'
 
-client.run("NjY1ODA4MTAxOTUzNTAzMjQy.XhrAZQ.JXE6A5bE5eRMfwqN6MgrufuXWHI")
+client.run("")
 
