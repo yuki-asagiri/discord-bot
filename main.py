@@ -50,8 +50,7 @@ async def update(ctx, unique_id, item, amount):
     if(cocutil.is_initial_sign(amount)):
         new_chara_data = file_cont.status_converter2(item, unique_id, amount)
     else:
-        new_chara_data = file_cont.status_converter2
-        (item, unique_id, amount)
+        new_chara_data = file_cont.status_converter(item, unique_id, amount)
     await ctx.send(file_cont.chara_data_output(unique_id, item))
 
 bot.run("")
