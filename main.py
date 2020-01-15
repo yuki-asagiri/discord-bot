@@ -2,7 +2,9 @@ import discord
 import asyncio
 import file_cont
 
-client = discord.Client()
+from discord.ext import commands
+
+#client = discord.Client()
 global read_flag
 global oumu_flag
 global pc_list
@@ -17,14 +19,43 @@ pc_list = file_cont.chara_lister()
 status_flag = 'No Status'
 status_list = ['full', 'STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU', 'HP', 'MP', 'SAN', 'idea', '幸運', '知識']
 
-@client.event
+#コマンド関連の定義
+bot = commands.Bot(command_prefix='$')
+
+@bot.event
 async def on_ready():
     print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
+    print(bot.user.name)
+    print(bot.user.id)
     print('------')
 
-@client.event
+#コマンド処理
+@bot.command()
+async def test(ctx):
+    print('テストコマンドだよ')
+    await ctx.send('ひえー')
+
+@bot.command()
+async def load(ctx, *args):
+    print('$load', args[0], args[1])
+    msg='$load ' + args[0] + ' ' +  args[1] + 'の処理をしたい。'
+    await ctx.send(msg)
+
+@bot.command()
+async def show(ctx, *args):
+    print('$show', args[0], args[1])
+    msg='$show ' + args[0] + ' ' +  args[1] + 'の処理をしたい。'
+    await ctx.send(msg)
+
+@bot.command()
+async def update(ctx, *args):
+    print('$update', args[0], args[1], args[2])
+    msg='$update ' + args[0] + ' ' +  args[1] + ' ' + args[2] +  'の処理をしたい。'
+    await ctx.send(msg)
+
+
+
+#@client.event
 async def on_message(message):
     global name_flag
     global oumu_flag
@@ -78,10 +109,10 @@ async def on_message(message):
             read_flag = 'Off'
 
     if file_cont.list_in_message(message.content, pc_list):
-        msg = "以下のキャラクターを読み込みました" 
+        msg = "以下のキャラクターを読み込みました"
         await message.channel.send(msg)
         print(message.content)
-        name_flag = message.content 
+        name_flag = message.content
         await message.channel.send(file_cont.chara_data_output(message.content, 'full'))
 
     if file_cont.list_in_message(message.content, status_list) and ':' in message.content:
@@ -101,5 +132,5 @@ async def on_message(message):
         await message.channel.send(file_cont.chara_data_output(name_flag, status_flag))
         status_flag = 'No Status'
 
-client.run("")
 
+bot.run("")
