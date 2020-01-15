@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import file_cont
+import cocutil
 
 from discord.ext import commands
 
@@ -46,7 +47,11 @@ async def show(ctx, unique_id, item):
 @bot.command()
 async def update(ctx, unique_id, item, amount):
     print('$update', unique_id, item, amount)
-    new_chara_data = file_cont.status_converter2(item, unique_id, amount)
+    if(cocutil.is_initial_sign(amount)):
+        new_chara_data = file_cont.status_converter2(item, unique_id, amount)
+    else:
+        new_chara_data = file_cont.status_converter2
+        (item, unique_id, amount)
     await ctx.send(file_cont.chara_data_output(unique_id, item))
 
 bot.run("")

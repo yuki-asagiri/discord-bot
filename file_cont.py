@@ -132,7 +132,7 @@ def outputer(data, form):
                         '知識 '+data['status']['知識'])
     else:
         status = form
-        put_result = (  'PC名 '+data['name']+'\n'+status + data['status'][form])
+        put_result = (  'PC名 '+data['name']+'\n'+status + ' ' + data['status'][form])
     print(put_result)
     return put_result
 
