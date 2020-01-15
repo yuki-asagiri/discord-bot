@@ -30,7 +30,7 @@ def status_converter(status, unique_id, val):
 # valで指定した値だけステータスを増減する
 def status_converter2(status, unique_id, val):
     chara = chara_loader(unique_id)
-    chara['status'][status] = chara['status'][status] + int(val)
+    chara['status'][status] = str(int(chara['status'][status]) + int(val))
 
     f = open('path/chara_data/'+chara["unique_id"]+'.json', 'w')
     json.dump(chara, f)
