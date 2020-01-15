@@ -42,17 +42,17 @@ async def load(ctx, unique_id, url):
     chara_url = url + '.js'
     raw_chara_data = file_cont.chara_data_download(chara_url)
     print(raw_chara_data)
-    chara_data = file_cont.chara_data_extracter()
+    chara_data = file_cont.chara_data_extracter(unique_id)
     await ctx.send('以下のキャラデータを保存しました')
     await ctx.send(file_cont.chara_data_output(unique_id, 'full'))
     print('success!!')
-    pc_list.append(ext_chara['name'])
+    pc_list.append(unique_id)
     print(pc_list)
 
 @bot.command()
 async def show(ctx, unique_id, item):
     print('$show', unique_id, item)
-    await ctx.send(file_cont.char_data_output(unique_id, 'full'))
+    await ctx.send(file_cont.chara_data_output(unique_id, item))
 
 @bot.command()
 async def update(ctx, *args):
@@ -97,23 +97,6 @@ async def on_message(message):
         read_flag = 'On'
         print(read_flag)
         await message.channel.send(msg)
-
-    if 'http' in message.content:
-        print('read_flag')
-        print(read_flag)
-        if read_flag == 'On':
-            print('データ読み込み')
-            print('success!!')
-            chara_url = message.content + '.js'
-            print(chara_url)
-            chara_data = file_cont.chara_data_download(chara_url)
-            print(chara_data)
-            ext_chara = file_cont.chara_data_extracter()
-            await message.channel.send('以下のキャラデータを保存しました')
-            await message.channel.send(file_cont.chara_data_output(ext_chara['name'], 'full'))
-            pc_list.append(ext_chara['name'])
-            print(pc_list)
-            read_flag = 'Off'
 
     if file_cont.list_in_message(message.content, pc_list):
         msg = "以下のキャラクターを読み込みました"

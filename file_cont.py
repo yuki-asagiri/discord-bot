@@ -63,7 +63,7 @@ def chara_data_extracter(unique_id):
         s = f.read()
     chara = json.loads(s)
     new_chara_json = { "name" : chara["pc_name"],
-      "unique_id" : unique_id
+      "unique_id" : unique_id,
       "status" : {
           "STR"  : chara["NA1"],
           "CON"  : chara["NA2"],
