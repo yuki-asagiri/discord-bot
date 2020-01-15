@@ -17,18 +17,29 @@ def list_in_ob(message, lolist):
         if i in message:
             return i
 
-def status_converter(status, name, val):
-    chara = chara_loader(name)
+# valで指定した値にステータスを変更する
+def status_converter(status, unique_id, val):
+    chara = chara_loader(unique_id)
     chara['status'][status] = val
 
-    f = open('path/chara_data/'+chara["name"]+'.json', 'w')
+    f = open('path/chara_data/'+chara["unique_id"]+'.json', 'w')
     json.dump(chara, f)
 
     return chara
 
-def chara_loader(name):
+# valで指定した値だけステータスを増減する
+def status_converter2(status, unique_id, val):
+    chara = chara_loader(unique_id)
+    chara['status'][status] = chara['status'][status] + int(val)
+
+    f = open('path/chara_data/'+chara["unique_id"]+'.json', 'w')
+    json.dump(chara, f)
+
+    return chara
+
+def chara_loader(unique_id):
     file_path = 'path/chara_data/'
-    chara_name = str(name) + '.json'
+    chara_name = str(unique_id) + '.json'
     data_path = file_path + chara_name
 
     with open(data_path) as f:
