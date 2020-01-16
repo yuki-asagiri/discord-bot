@@ -10,5 +10,5 @@ def dice_json_is_secret(json):
     return dice_result
 
 def dice_json_outputer(json):
-    print_message = json['result']
+    print_message = [json['result'], json['secret']]
     return print_message

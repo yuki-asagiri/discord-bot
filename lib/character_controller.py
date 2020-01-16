@@ -44,13 +44,11 @@ def chara_data_download(id_url, unique_id):
         data = response.json()
     except JSONDecodeError:
         data =  'キャラクターが読み込めませんでした'
-        return data
+        return 
     print(data)
     
     # jsonのフォーマットを整形する
-    chara_data = chara_data_extracter(data, unique_id)
-
-    return chara_data
+    chara_data_extracter(data, unique_id)
 
 def chara_data_extracter(chara, unique_id):
     print('キャラデータの保存')
@@ -79,8 +77,6 @@ def chara_data_extracter(chara, unique_id):
     # キャラデータの保存
     print('Chara_data save now')
     fc.file_writer(new_chara_json, unique_id)
-
-    return new_chara_json
 
 def chara_data_output(unique_id, form):
     chara_data = fc.file_reader(unique_id)

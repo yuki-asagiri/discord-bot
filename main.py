@@ -49,12 +49,14 @@ async def on_message(message):
     
     if dc.string_analyze(message.content):
         msg = dc.dice_api_client(message.content)
-        print(msg)
-        dm = await message.author.create_dm()
-        await message.channel.send(msg)
-        await dm.send(msg)
-
-    await bot.process_commands(message)
+        if msg == False:
+            await bot.process_commands(message)
+        else:
+            print(msg[0])
+            dm = await message.author.create_dm()
+            await message.channel.send(msg[0])
+            if msg[1]:
+                await dm.send(msg[0])
 
 #コマンド処理
 @bot.command()
@@ -66,20 +68,20 @@ async def test(ctx):
 async def load(ctx, unique_id, url):
     print('$load', unique_id, url)
     if url == '':
-        await ctx.send('urlを入力してください')
+        await ctx.send('urlを入力してくださいっす。')
         return 
     
     # キャラクター保管所からデータを持ってくる
     chara_url = url + '.js'
-    chara_data = cc.chara_data_download(chara_url, unique_id)
+    cc.chara_data_download(chara_url, unique_id)
     print('success!!')
 
     if cc.list_in_keyword(unique_id, pc_list):
         print('The '+ unique_id + ' is overwritten')
-        await ctx.send(unique_id + 'さんのデータは上書きされます')
+        await ctx.send(unique_id + 'さんのデータは上書きされるっす。')
     else:
         pc_list.append(unique_id)
-        await ctx.send('以下のキャラデータを保存しました')
+        await ctx.send('以下のキャラデータを保存したっすよ。')
         await ctx.send(cc.chara_data_output(unique_id, 'all'))
     print(pc_list)
 
@@ -93,9 +95,9 @@ async def show(ctx, unique_id, item):
 async def update(ctx, unique_id, item, amount):
     print('$update', unique_id, item, amount)
     if(sc.is_initial_sign(amount)):
-        new_chara_data = sc.status_converter2(item, unique_id, amount)
+        sc.status_converter2(item, unique_id, amount)
     else:
-        new_chara_data = sc.status_converter(item, unique_id, amount)
+        sc.status_converter(item, unique_id, amount)
     await ctx.send(cc.chara_data_output(unique_id, item))
 
 bot.run(token)
