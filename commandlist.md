@@ -22,6 +22,16 @@
 指定したキャラの現在のステータスを表示する。
 
 
+## **skill** 仮実装
+### ``` $skill [unique_id] [skillname] ```
+- unique_id: 操作対象キャラのid
+- skillname: 表示したい技能名。＜運転（自動車）＞等の場合、（）の部分は不要で＜運転＞のみ指定する。
+
+[仮]
+
+指定したキャラの技能値を表示する。
+
+
 ## **update**
 ### ``` $update [unique_id] [item] [amount] ```
 - unique_id: 操作対象キャラのid
