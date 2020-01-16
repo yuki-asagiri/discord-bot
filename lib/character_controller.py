@@ -183,7 +183,7 @@ def chara_data_extracter(unique_id):
             {"name" : "制作（" + chara["seisaku_bunya"] + "）",
              "value" : chara["TAAP"][5]},
           "操縦" :
-            {"name" : "操縦（" + cahra["main_souju_norimono"] + "）",
+            {"name" : "操縦（" + chara["main_souju_norimono"] + "）",
              "value" : chara["TAAP"][6]},
           "跳躍" :
             {"name" : "跳躍",
