@@ -41,7 +41,7 @@ async def on_message(message):
 
     if oumu_flag:
         await message.channel.send(message.content+'、っす。')
- 
+
     if '返事して' in message.content:
         msg = '了解っす。'
         oumu_flag = True
@@ -68,9 +68,10 @@ async def test(ctx):
 async def load(ctx, unique_id, url):
     print('$load', unique_id, url)
     if url == '':
-        await ctx.send('urlを入力してくださいっす。')
-        return 
-    
+
+        await ctx.send('urlを入力してください')
+        return
+
     # キャラクター保管所からデータを持ってくる
     chara_url = url + '.js'
     chara_dl_bool = cc.chara_data_download(chara_url, unique_id)
@@ -91,6 +92,12 @@ async def load(ctx, unique_id, url):
 async def show(ctx, unique_id, item):
     print('$show', unique_id, item)
     await ctx.send(cc.chara_data_output(unique_id, item))
+
+# skillコマンドは仮実装（実際はshowコマンドにぶら下げたい）
+@bot.command()
+async def skill(ctx, unique_id, skillname):
+    print('$skill', unique_id, skillname)
+    await ctx.send(cc.skill_data_output(unique_id, skillname))
 
 # updateコマンドは現時点では増減指定のみ対応
 @bot.command()
