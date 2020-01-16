@@ -36,28 +36,19 @@ def chara_lister():
 # 一時ファイルの作成及びキャラデータリクエスト
 def chara_data_download(id_url, unique_id):
     print('downloaderの読み込み')
-    dir_path = 'path/chara_data/'
-    tmp_id = 'malmalmalmal'
-    file_name = dir_path + tmp_id + '.json'
-    # chara_id = 'path/chara_data/malmalmalmal.json'
+    headers = {"content-type": "application/json"}
+    req = id_url
+    response = requests.get(req, headers=headers)
+    try:
+        data = response.json()
+        # jsonのフォーマットを整形する
+        chara_data_extracter(data, unique_id)
+        return True
+    except JSONDecodeError:
+        data = 'キャラクターが読み込めなかったっす。'
+        return False
 
-    # return urllib.request.urlretrieve(id_url, chara_id)
-    response = requests.get(id_url)
-    print(response)
-    raw_chara_data = urllib.request.urlretrieve(id_url, file_name)
-    print(raw_chara_data)
-    if raw_chara_data =='undefined':
-        print('Error occured. Can not load json data')
-        return 'キャラデータを読み込めませんでした'
-    else:
-        print('Chara load success')
-
-    # jsonのフォーマットを整形する
-    chara_data = chara_data_extracter(unique_id)
-
-    return chara_data
-
-def chara_data_extracter(unique_id):
+def chara_data_extracter(chara, unique_id):
     print('キャラデータの保存')
 
     # 基礎ステータスの読み込み
@@ -274,11 +265,6 @@ def chara_data_extracter(unique_id):
     # キャラデータの保存
     print('Chara_data save now')
     fc.file_writer(new_chara_json, unique_id)
-
-    # 一時ファイルの削除
-    fc.file_json_deleter(tmp_id)
-
-    return new_chara_json
 
 def chara_data_output(unique_id, form):
     chara_data = fc.file_reader(unique_id)
