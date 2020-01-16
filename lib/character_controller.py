@@ -316,6 +316,10 @@ def status_outputer(data, form):
 
     return put_result
 
+def chara_data_output(unique_id, skillname):
+    chara_data = fc.file_reader(unique_id)
+    return skill_outputer(chara_data, skillname)
+
 def skill_outputer(data, skill):
     put_result = ( '\nPC名 '+data['name']+'\n'+data['skill'][skill]['name'] + ' ' + data['skill'][skill]['value'])
     print(put_result)

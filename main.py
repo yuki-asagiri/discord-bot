@@ -84,7 +84,7 @@ async def show(ctx, unique_id, item):
 @bot.command()
 async def skill(ctx, unique_id, skillname):
     print('$skill', unique_id, skillname)
-    await ctx.send(cc.skill_outputer(unique_id, skillname))
+    await ctx.send(cc.skill_data_output(unique_id, skillname))
 
 # updateコマンドは現時点では増減指定のみ対応
 @bot.command()
