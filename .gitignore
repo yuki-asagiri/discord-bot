@@ -1,5 +1,7 @@
 # キャッシュファイルはいらない
 /__pycache__/
+lib/__pycache__/
+api_client/__pycache__/
 
 # tokenのファイルは見なくていい
 bot-token.txt
