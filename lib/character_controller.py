@@ -316,7 +316,7 @@ def status_outputer(data, form):
 
     return put_result
 
-def chara_data_output(unique_id, skillname):
+def skill_data_output(unique_id, skillname):
     chara_data = fc.file_reader(unique_id)
     return skill_outputer(chara_data, skillname)
 
