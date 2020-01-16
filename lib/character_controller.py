@@ -52,7 +52,7 @@ def chara_data_download(id_url, unique_id):
         return 'キャラデータを読み込めませんでした'
     else:
         print('Chara load success')
-    
+
     # jsonのフォーマットを整形する
     chara_data = chara_data_extracter(unique_id)
 
@@ -85,6 +85,10 @@ def chara_data_extracter(unique_id):
           "idea" : chara["NA12"],
           "幸運" : chara["NA13"],
           "知識" : chara["NA14"]
+        },
+      # 戦闘系技能：TBAP、探索系技能：TFAP 行動系技能：TAAP 交渉系技能：TCAP 知識系技能:TLAP
+      "skill" : {
+          "回避" : chara["TBAP"][0]
         }
     }
 
@@ -93,7 +97,7 @@ def chara_data_extracter(unique_id):
     fc.file_writer(new_chara_json, unique_id)
 
     # 一時ファイルの削除
-    fc.file_json_deleter(tmp_id) 
+    fc.file_json_deleter(tmp_id)
 
     return new_chara_json
 
