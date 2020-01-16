@@ -19,7 +19,7 @@ def file_reader(unique_id):
     data_path = dir_path + chara_name
  
     if not os.path.isfile(data_path):
-        return 'キャラクターがいません'
+        return 'キャラクターがいないっす。'
     else:
         with open(data_path, 'r') as f:
             s = f.read()

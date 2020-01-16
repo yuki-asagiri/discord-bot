@@ -73,16 +73,18 @@ async def load(ctx, unique_id, url):
     
     # キャラクター保管所からデータを持ってくる
     chara_url = url + '.js'
-    cc.chara_data_download(chara_url, unique_id)
-    print('success!!')
-
-    if cc.list_in_keyword(unique_id, pc_list):
-        print('The '+ unique_id + ' is overwritten')
-        await ctx.send(unique_id + 'さんのデータは上書きされるっす。')
+    chara_dl_bool = cc.chara_data_download(chara_url, unique_id)
+    if chara_dl_bool:
+        print('success!!')
+        if cc.list_in_keyword(unique_id, pc_list):
+            print('The '+ unique_id + ' is overwritten')
+            await ctx.send(unique_id + 'さんのデータは上書きされるっす。')
+        else:
+            pc_list.append(unique_id)
+            await ctx.send('以下のキャラデータを保存したっすよ。')
+            await ctx.send(cc.chara_data_output(unique_id, 'all'))
     else:
-        pc_list.append(unique_id)
-        await ctx.send('以下のキャラデータを保存したっすよ。')
-        await ctx.send(cc.chara_data_output(unique_id, 'all'))
+        await ctx.send('キャラクターを読み込めなかったっす。')
     print(pc_list)
 
 @bot.command()

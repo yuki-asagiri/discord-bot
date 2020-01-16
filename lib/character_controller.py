@@ -42,16 +42,16 @@ def chara_data_download(id_url, unique_id):
     response = requests.get(req, headers=headers)
     try:
         data = response.json()
+        # jsonのフォーマットを整形する
+        chara_data_extracter(data, unique_id)
+        return True
     except JSONDecodeError:
-        data =  'キャラクターが読み込めませんでした'
-        return 
-    print(data)
-    
-    # jsonのフォーマットを整形する
-    chara_data_extracter(data, unique_id)
+        data = 'キャラクターが読み込めなかったっす。'
+        return False
 
 def chara_data_extracter(chara, unique_id):
     print('キャラデータの保存')
+
 
     # 基礎ステータスの読み込み
     new_chara_json = { "name" : chara["pc_name"],
@@ -71,7 +71,7 @@ def chara_data_extracter(chara, unique_id):
           "idea" : chara["NA12"],
           "幸運" : chara["NA13"],
           "知識" : chara["NA14"]
-        }
+        },
     }
 
     # キャラデータの保存
