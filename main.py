@@ -10,7 +10,7 @@ with open('bot-token.txt', 'r') as KEY: secret = KEY.readlines()
 token = secret[0].strip()
 
 # コマンド関連の定義
-bot = commands.Bot(command_prefix='')
+bot = commands.Bot(command_prefix='$')
 
 # 変数定義
 oumu_flag = False
@@ -74,6 +74,7 @@ async def load(ctx, unique_id, url):
     # キャラクター保管所からデータを持ってくる
     chara_url = url + '.js'
     chara_dl_bool = cc.chara_data_download(chara_url, unique_id)
+    print(chara_dl_bool)
     if chara_dl_bool:
         print('success!!')
         if cc.list_in_keyword(unique_id, pc_list):

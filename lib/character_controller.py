@@ -41,12 +41,13 @@ def chara_data_download(id_url, unique_id):
     response = requests.get(req, headers=headers)
     try:
         data = response.json()
+        print(data)
         # jsonのフォーマットを整形する
         chara_data_extracter(data, unique_id)
-        return True
-    except JSONDecodeError:
-        data = 'キャラクターが読み込めなかったっす。'
-        return False
+        result = True
+    except:
+        result = False
+    return result
 
 def chara_data_extracter(chara, unique_id):
     print('キャラデータの保存')
@@ -259,7 +260,6 @@ def chara_data_extracter(chara, unique_id):
              "value" : chara["TKAP"][18]},
           #知識技能で独自のものを追加した場合ここに入る可能性がある（未対応）
         }
-
     }
 
     # キャラデータの保存
