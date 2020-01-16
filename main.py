@@ -1,105 +1,93 @@
 import discord
 import asyncio
-import file_cont
+from lib import character_controller as cc
+from lib import status_controller as sc
+from discord.ext import commands
 
-client = discord.Client()
-global read_flag
-global oumu_flag
-global pc_list
-global status_list
-global name_flag
-global status_flag
+# OAuthトークンファイルの読み込み
+with open('bot-token.txt', 'r') as KEY: secret = KEY.readlines()
+token = secret[0].strip()
 
-name_flag = 'No Chara'
-read_flag = 'Off'
-oumu_flag = 'Off'
-pc_list = file_cont.chara_lister()
-status_flag = 'No Status'
+# コマンド関連の定義
+bot = commands.Bot(command_prefix='$')
+
+# 変数定義
+oumu_flag = False
+pc_list = cc.chara_lister()
 status_list = ['full', 'STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU', 'HP', 'MP', 'SAN', 'idea', '幸運', '知識']
 
-@client.event
+# ログイン時の処理
+@bot.event
 async def on_ready():
     print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
+    print(bot.user.name)
+    print(bot.user.id)
     print('------')
 
-@client.event
+# メッセージに対する反応集
+@bot.event
 async def on_message(message):
-    global name_flag
     global oumu_flag
-    global read_flag
-    global pc_list
-    global status_list
-    if message.author == client.user:
+    print(message.author.name)
+
+    if message.author.bot:
         return
 
-    if oumu_flag == 'On':
-        oumu_flag = 'Off'
-        await message.channel.send(message.content)
-
-    if '御中くんさよなら' in message.content:
-        msg = '皆さんさようならっす'
-        oumu_flag = 'Off'
+    if '返事やめて' in message.content:
+        msg = '了解っす。'
+        oumu_flag = False
         await message.channel.send(msg)
 
+    if oumu_flag:
+        await message.channel.send(message.content+'、っす。')
+ 
     if '返事して' in message.content:
-        msg = '了解っす'
-        oumu_flag = 'On'
+        msg = '了解っす。'
+        oumu_flag = True
         await message.channel.send(msg)
 
-    if 'Hello' in message.content:
-        print(message.author.name)
-        msg = "こんにちはっす" + message.author.name + "さん"
-        await message.channel.send(msg)
+    await bot.process_commands(message)
 
-    if 'ニラレバ' in message.content:
-        print('ニラレバ開始')
-        msg = "キャラシのURLを貼ってね"
-        read_flag = 'On'
-        print(read_flag)
-        await message.channel.send(msg)
+#コマンド処理
+@bot.command()
+async def test(ctx):
+    print('$test')
+    await ctx.send('ひえー')
 
-    if 'http' in message.content:
-        print('read_flag')
-        print(read_flag)
-        if read_flag == 'On':
-            print('データ読み込み')
-            print('success!!')
-            chara_url = message.content + '.js'
-            print(chara_url)
-            chara_data = file_cont.chara_data_download(chara_url)
-            print(chara_data)
-            ext_chara = file_cont.chara_data_extracter()
-            await message.channel.send('以下のキャラデータを保存しました')
-            await message.channel.send(file_cont.chara_data_output(ext_chara['name'], 'full'))
-            pc_list.append(ext_chara['name'])
-            print(pc_list)
-            read_flag = 'Off'
+@bot.command()
+async def load(ctx, unique_id, url):
+    print('$load', unique_id, url)
+    if url == '':
+        await ctx.send('urlを入力してください')
+        return 
+    
+    # キャラクター保管所からデータを持ってくる
+    chara_url = url + '.js'
+    chara_data = cc.chara_data_download(chara_url, unique_id)
+    print('success!!')
 
-    if file_cont.list_in_message(message.content, pc_list):
-        msg = "以下のキャラクターを読み込みました" 
-        await message.channel.send(msg)
-        print(message.content)
-        name_flag = message.content 
-        await message.channel.send(file_cont.chara_data_output(message.content, 'full'))
+    if cc.list_in_keyword(unique_id, pc_list):
+        print('The '+ unique_id + ' is overwritten')
+        await ctx.send(unique_id + 'さんのデータは上書きされます')
+    else:
+        pc_list.append(unique_id)
+        await ctx.send('以下のキャラデータを保存しました')
+        await ctx.send(cc.chara_data_output(unique_id, 'all'))
+    print(pc_list)
 
-    if file_cont.list_in_message(message.content, status_list) and ':' in message.content:
-        msg = "ステータス更新"
-        status_flag = message.content.split(':')
-        print(status_flag)
-        await message.channel.send(msg)
-        await message.channel.send(name_flag+'の'+status_flag[0]+'を'+status_flag[1]+'に更新します')
-        new_chara_data = file_cont.status_converter(status_flag[0], name_flag, status_flag[1])
-        await message.channel.send(file_cont.chara_data_output(name_flag, 'full'))
-        name_flag = 'No Chara'
-        status_flag = 'No Status'
+@bot.command()
+async def show(ctx, unique_id, item):
+    print('$show', unique_id, item)
+    await ctx.send(cc.chara_data_output(unique_id, item))
 
-    if 'ステータス表示' in message.content and file_cont.list_in_message(message.content, status_list):
-        status_flag = file_cont.list_in_ob(message.content, status_list)
-        msg = name_flag + 'の' + status_flag + 'を表示します'
-        await message.channel.send(file_cont.chara_data_output(name_flag, status_flag))
-        status_flag = 'No Status'
+# updateコマンドは現時点では増減指定のみ対応
+@bot.command()
+async def update(ctx, unique_id, item, amount):
+    print('$update', unique_id, item, amount)
+    if(sc.is_initial_sign(amount)):
+        new_chara_data = sc.status_converter2(item, unique_id, amount)
+    else:
+        new_chara_data = sc.status_converter(item, unique_id, amount)
+    await ctx.send(cc.chara_data_output(unique_id, item))
 
-client.run("")
-
+bot.run(token)

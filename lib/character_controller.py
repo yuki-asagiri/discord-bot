@@ -3,13 +3,14 @@ import glob
 import json
 import urllib.request
 import os
+from lib import file_controller as fc
 
 def test():
-    print('直接読まないで')
+    print('キャラデータの操作ファイルです')
 
-def list_in_message(message, lolist):
+def list_in_keyword(keyword, lolist):
     for i in lolist:
-        if i in message:
+        if i in keyword:
             return True
 
 def list_in_ob(message, lolist):
@@ -17,52 +18,58 @@ def list_in_ob(message, lolist):
         if i in message:
             return i
 
-def status_converter(status, name, val):
-    chara = chara_loader(name)
-    chara['status'][status] = val
+def chara_loader(unique_id):
+    return fc.file_reader(unique_id)
 
-    f = open('path/chara_data/'+chara["name"]+'.json', 'w')
-    json.dump(chara, f)   
-
-    return chara
-
-def chara_loader(name):
-    file_path = 'path/chara_data/'
-    chara_name = str(name) + '.json'
-    data_path = file_path + chara_name
-
-    with open(data_path) as f:
-        s = f.read()
-    result = json.loads(s)
-    return result
+def chara_saver(character_json, unique_id):
+    return fc.file_writer(character_json, unique_id)
 
 def chara_lister():
     dir_path = 'path/chara_data/'
     file_list = glob.glob(dir_path+'*')
     pc_name_list = []
     for file_name in file_list:
-       pc_name_list.append(file_name.split('.')[0].split('/')[2]) 
+       pc_name_list.append(file_name.split('.')[0].split('/')[2])
     print(pc_name_list)
 
     return pc_name_list
 
-def chara_data_download(id_url):
-    print('download読み込み')
-    chara_id = 'path/chara_data/malmalmalmal.json'
-    
+# 一時ファイルの作成及びキャラデータリクエスト
+def chara_data_download(id_url, unique_id):
+    print('downloaderの読み込み')
+    dir_path = 'path/chara_data/'
+    tmp_id = 'malmalmalmal'
+    file_name = dir_path + tmp_id + '.json'
+    # chara_id = 'path/chara_data/malmalmalmal.json'
+
     # return urllib.request.urlretrieve(id_url, chara_id)
     response = requests.get(id_url)
     print(response)
-    chara_data = urllib.request.urlretrieve(id_url, chara_id)
+    raw_chara_data = urllib.request.urlretrieve(id_url, file_name)
+    print(raw_chara_data)
+    if raw_chara_data =='undefined':
+        print('Error occured. Can not load json data')
+        return 'キャラデータを読み込めませんでした'
+    else:
+        print('Chara load success')
+    
+    # jsonのフォーマットを整形する
+    chara_data = chara_data_extracter(unique_id)
 
     return chara_data
 
-def chara_data_extracter():
-    
-    with open('path/chara_data/malmalmalmal.json') as f:
-        s = f.read()
-    chara = json.loads(s)
+def chara_data_extracter(unique_id):
+    print('キャラデータの保存')
+
+    # tmpデータのID
+    tmp_id = 'malmalmalmal'
+
+    # 一時ファイルの読み込み
+    chara = fc.file_reader(tmp_id)
+
+    # 基礎ステータスの読み込み
     new_chara_json = { "name" : chara["pc_name"],
+      "unique_id" : unique_id,
       "status" : {
           "STR"  : chara["NA1"],
           "CON"  : chara["NA2"],
@@ -79,30 +86,25 @@ def chara_data_extracter():
           "幸運" : chara["NA13"],
           "知識" : chara["NA14"]
         }
-    } 
+    }
 
-    f = open('path/chara_data/'+new_chara_json["name"]+'.json', 'w')
-    json.dump(new_chara_json, f)
-    
-    os.remove('path/chara_data/malmalmalmal.json')
+    # キャラデータの保存
+    print('Chara_data save now')
+    fc.file_writer(new_chara_json, unique_id)
+
+    # 一時ファイルの削除
+    fc.file_json_deleter(tmp_id) 
 
     return new_chara_json
 
-def chara_data_output(chara_name, form):
-    name = chara_name
-    dir_path = 'path/chara_data/'
-    file_path = dir_path + name + '.json'
-    if not os.path.isfile(file_path):
-        return 'キャラクターがいません'   
-    else:
-        with open(file_path, 'r') as f:
-            s = f.read()
-        chara_data = json.loads(s)
-        return outputer(chara_data, form)
+def chara_data_output(unique_id, form):
+    chara_data = fc.file_reader(unique_id)
+    return status_outputer(chara_data, form)
 
-def outputer(data, form):
-    if form == 'full':
-        put_result = (  'PC名 '+data['name']+'\n'
+def status_outputer(data, form):
+    if form == 'all':
+        put_result = ('\nPC名 '+data['name']+'\n'
+                        'ID '+data['unique_id']+'\n'
                         'STR  '+data['status']['STR']+'\n'
                         'CON  '+data['status']['CON']+'\n'
                         'POW  '+data['status']['POW']+'\n'
@@ -119,11 +121,12 @@ def outputer(data, form):
                         '知識 '+data['status']['知識'])
     else:
         status = form
-        put_result = (  'PC名 '+data['name']+'\n'+status + data['status'][form])
+        put_result = ( '\nPC名 '+data['name']+'\n'+status + ' ' + data['status'][form])
     print(put_result)
+
     return put_result
 
 if __name__ == '__main__':
     test()
 
-print('success file load')
+print('success status controller load')
