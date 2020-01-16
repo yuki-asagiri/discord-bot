@@ -123,6 +123,12 @@ def status_outputer(data, form):
                         'idea '+data['status']['idea']+'\n'
                         '幸運 '+data['status']['幸運']+'\n'
                         '知識 '+data['status']['知識'])
+
+    elif form == 'skill':
+        put_result = ('\nPC名 '+data['name']+'\n'
+                        'ID '+data['unique_id']+'\n'
+                        '回避  '+data['skill']['回避'])
+
     else:
         status = form
         put_result = ( '\nPC名 '+data['name']+'\n'+status + ' ' + data['status'][form])
