@@ -86,7 +86,7 @@ def chara_data_extracter(unique_id):
           "幸運" : chara["NA13"],
           "知識" : chara["NA14"]
         },
-      # 戦闘系技能：TBAP、探索系技能：TFAP 行動系技能：TAAP 交渉系技能：TCAP 知識系技能:TLAP
+      # 戦闘系技能：TBAP、探索系技能：TFAP 行動系技能：TAAP 交渉系技能：TCAP 知識系技能:TKAP
       "skill" : {
           "回避" :
             {"name" : "回避",
@@ -218,61 +218,61 @@ def chara_data_extracter(unique_id):
 
           "医学" :
             {"name" : "医学",
-             "value" : chara["TLAP"][0]},
+             "value" : chara["TKAP"][0]},
           "オカルト" :
             {"name" : "オカルト",
-             "value" : chara["TLAP"][1]},
+             "value" : chara["TKAP"][1]},
           "化学" :
             {"name" : "化学",
-             "value" : chara["TLAP"][2]},
+             "value" : chara["TKAP"][2]},
           "クトゥルフ神話" :
             {"name" : "クトゥルフ神話",
-             "value" : chara["TLAP"][3]},
+             "value" : chara["TKAP"][3]},
           "芸術" :
             {"name" : "芸術（" + chara["geijutu_bunya"] + "）",
-             "value" : chara["TLAP"][4]},
+             "value" : chara["TKAP"][4]},
           "経理" :
             {"name" : "経理",
-             "value" : chara["TLAP"][5]},
+             "value" : chara["TKAP"][5]},
           "考古学" :
             {"name" : "考古学",
-             "value" : chara["TLAP"][6]},
+             "value" : chara["TKAP"][6]},
           "コンピューター" :
             {"name" : "コンピューター",
-             "value" : chara["TLAP"][7]},
+             "value" : chara["TKAP"][7]},
           "心理学" :
             {"name" : "心理学",
-             "value" : chara["TLAP"][8]},
+             "value" : chara["TKAP"][8]},
           "人類学" :
             {"name" : "人類学",
-             "value" : chara["TLAP"][9]},
+             "value" : chara["TKAP"][9]},
           "生物学" :
             {"name" : "生物学",
-             "value" : chara["TLAP"][10]},
+             "value" : chara["TKAP"][10]},
           "地質学" :
             {"name" : "地質学",
-             "value" : chara["TLAP"][11]},
+             "value" : chara["TKAP"][11]},
           "電子工学" :
             {"name" : "電子工学",
-             "value" : chara["TLAP"][12]},
+             "value" : chara["TKAP"][12]},
           "天文学" :
             {"name" : "天文学",
-             "value" : chara["TLAP"][13]},
+             "value" : chara["TKAP"][13]},
           "博物学" :
             {"name" : "博物学",
-             "value" : chara["TLAP"][14]},
+             "value" : chara["TKAP"][14]},
           "物理学" :
             {"name" : "物理学",
-             "value" : chara["TLAP"][15]},
+             "value" : chara["TKAP"][15]},
           "法律" :
             {"name" : "法律",
-             "value" : chara["TLAP"][16]},
+             "value" : chara["TKAP"][16]},
           "薬学" :
             {"name" : "薬学",
-             "value" : chara["TLAP"][17]},
+             "value" : chara["TKAP"][17]},
           "歴史" :
             {"name" : "歴史",
-             "value" : chara["TLAP"][18]},
+             "value" : chara["TKAP"][18]},
           #知識技能で独自のものを追加した場合ここに入る可能性がある（未対応）
         }
     }
