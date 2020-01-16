@@ -2,6 +2,7 @@ import discord
 import asyncio
 from lib import character_controller as cc
 from lib import status_controller as sc
+from api_client import dicebot_client as dc
 from discord.ext import commands
 
 # OAuthトークンファイルの読み込み
@@ -9,7 +10,7 @@ with open('bot-token.txt', 'r') as KEY: secret = KEY.readlines()
 token = secret[0].strip()
 
 # コマンド関連の定義
-bot = commands.Bot(command_prefix='$')
+bot = commands.Bot(command_prefix='')
 
 # 変数定義
 oumu_flag = False
@@ -32,7 +33,7 @@ async def on_message(message):
 
     if message.author.bot:
         return
-
+    
     if '返事やめて' in message.content:
         msg = '了解っす。'
         oumu_flag = False
@@ -45,6 +46,13 @@ async def on_message(message):
         msg = '了解っす。'
         oumu_flag = True
         await message.channel.send(msg)
+    
+    if dc.string_analyze(message.content):
+        msg = dc.dice_api_client(message.content)
+        print(msg)
+        dm = await message.author.create_dm()
+        await message.channel.send(msg)
+        await dm.send(msg)
 
     await bot.process_commands(message)
 
