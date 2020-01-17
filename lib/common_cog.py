@@ -11,9 +11,9 @@ from discord.ext import commands
 class CommonCog(commands.Cog):
 
     #コンストラクタ
-    def __init__(self, bot,):
+    def __init__(self, bot):
         self.bot = bot
-        print('setup command $' + pc_unique_id)
+        print('setup common commands')
 
     # メッセージに対する反応集
     @commands.Cog.listener()
