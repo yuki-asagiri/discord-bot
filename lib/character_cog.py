@@ -50,7 +50,7 @@ class CharaCog(commands.Cog):
         await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname))
 
     # スキルロール
-    @commands.command(alias = 'dice')
+    @commands.command()
     async def roll(self, ctx, skillname):
         print('$' + self.pc_unique_id, 'roll', skillname)
         # まずは技能値を表示
@@ -58,6 +58,21 @@ class CharaCog(commands.Cog):
         # 次にダイスロール実施
         skill_value = cc.get_skill_value(self.pc_unique_id, skillname)
         msg = dc.dice_api_client('ccb<=' + skill_value)
+        print(msg[0])
+        dm = await ctx.author.create_dm()
+        await ctx.send(msg[0])
+        if msg[1]:
+            await dm.send(msg[0])
+
+    # スキルロール
+    @commands.command()
+    async def sroll(self, ctx, skillname):
+        print('$' + self.pc_unique_id, 'roll', skillname)
+        # まずは技能値を表示
+        await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname))
+        # 次にダイスロール実施
+        skill_value = cc.get_skill_value(self.pc_unique_id, skillname)
+        msg = dc.dice_api_client('sccb<=' + skill_value)
         print(msg[0])
         dm = await ctx.author.create_dm()
         await ctx.send(msg[0])
