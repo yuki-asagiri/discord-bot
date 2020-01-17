@@ -40,10 +40,25 @@ class CharaCog(commands.Cog):
     @commands.command()
     async def status(self, ctx, item):
         print('$' + self.pc_unique_id, 'status', item)
-        await ctx.send(cc.chara_dacta_output(self.pc_unique_id, item))
+        await ctx.send(cc.chara_data_output(self.pc_unique_id, item))
 
     # スキル表示
     @commands.command()
     async def skill(self, ctx, skillname):
-        print('$skill', self.pc_unique_id, skillname)
+        print('$' + self.pc_unique_id, 'skill', skillname)
         await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname))
+
+    # スキルロール
+    @commands.command(alias = 'dice')
+    async def roll(self, ctx, skillname):
+        print('$' + self.pc_unique_id, 'roll', skillname)
+        # まずは技能値を表示
+        await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname))
+        # 次にダイスロール実施
+        skill_value = cc.get_skill_value(self.pc_unique_id, skillname)
+        msg = dc.dice_api_client('ccb<=' + skill_value)
+        print(msg[0])
+        dm = await message.author.create_dm()
+        await message.channel.send(msg[0])
+        if msg[1]:
+            await dm.send(msg[0])

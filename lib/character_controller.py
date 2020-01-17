@@ -310,6 +310,10 @@ def skill_outputer(data, skill):
     print(put_result)
     return put_result
 
+def get_skill_value(unique_id, skillname):
+    chara_data = fc.file_reader(unique_id)
+    return chara_data['skill'][skillname]['value']
+
 if __name__ == '__main__':
     test()
 
