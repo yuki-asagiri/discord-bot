@@ -13,10 +13,10 @@ class CharaCog(commands.Cog):
         subcommands = self.walk_commands()
         # ルートコマンド
         commands = self.get_commands()
-        for c in commands:
-            c.update(name = self.pc_unique_id)
         for c in subcommands:
             print(c.qualified_name)
+        for c in commands:
+            c.update(name = self.pc_unique_id)
 
         print('setup command $' + pc_unique_id)
 
