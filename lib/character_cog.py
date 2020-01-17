@@ -10,7 +10,7 @@ class CharaCog(commands.Cog):
         self.pc_unique_id = pc_unique_id
         commands = self.get_commands()
         for c in commands:
-            c.uopdate(name = self.pc_unique_id)
+            c.update(name = self.pc_unique_id)
         print('setup command $' + pc_unique_id)
 
     # コマンドグループのルート

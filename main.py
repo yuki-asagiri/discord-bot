@@ -37,7 +37,7 @@ class CharaBot(commands.Bot):
         for unique_id in pc_list:
             try:
                 self.add_cog(character_cog.CharaCog(self, unique_id))
-            except Excption:
+            except Exception:
                 traceback.print_exc()
 
 
