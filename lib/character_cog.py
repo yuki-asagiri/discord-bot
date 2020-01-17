@@ -12,14 +12,9 @@ class CharaCog(commands.Cog):
 
     # コマンドグループのルート
     # ${unique_id} に対応
-    @command.group(name = pc_unique_id)
+    @commands.group(name = pc_unique_id)
     async def root(self, ctx):
         # サブコマンドが呼ばれていない場合、メッセージを表示
         if ctx.invoked_subcommand is None:
             chara = cc.get_chara_data(unique_id)
             await ctx.send( chara['name'] + ' のコマンドっす。\n このコマンドにはサブコマンドが必要っす。')
-
-
-    # Bot本体側からコグを読み込む際に呼び出される関数。
-    def setup(bot):
-        bot.add_cog(CharaCog(bot)) # TestCogにBotを渡してインスタンス化し、Botにコグとして登録する。
