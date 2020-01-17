@@ -84,14 +84,3 @@ class CommonCog(commands.Cog):
         else:
             await ctx.send('キャラクターを読み込めなかったっす。')
         print(pc_list)
-
-
-    # updateコマンドは現時点では増減指定のみ対応
-    @commands.command()
-    async def update(self, ctx, unique_id, item, amount):
-        print('$update', unique_id, item, amount)
-        if(sc.is_initial_sign(amount)):
-            sc.status_converter2(item, unique_id, amount)
-        else:
-            sc.status_converter(item, unique_id, amount)
-        await ctx.send(cc.chara_data_output(unique_id, item))

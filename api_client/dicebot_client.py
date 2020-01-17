@@ -35,7 +35,7 @@ def dice_api_client(message):
     try:
         data = response.json()
     except:
-        data = False 
+        data = False
         return data
     print(data)
 
