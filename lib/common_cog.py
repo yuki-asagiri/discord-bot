@@ -7,6 +7,11 @@ from lib import character_cog
 from api_client import dicebot_client as dc
 from discord.ext import commands
 
+# 変数定義
+oumu_flag = False
+pc_list = cc.chara_lister()
+status_list = ['full', 'STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU', 'HP', 'MP', 'SAN', 'idea', '幸運', '知識']
+
 #コグとして用いるクラス
 class CommonCog(commands.Cog):
 
