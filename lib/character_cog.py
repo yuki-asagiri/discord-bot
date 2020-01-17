@@ -1,10 +1,15 @@
 from discord.ext import commands
 from lib import character_controller as cc
 
+# ルートコマンドの名前を変更すると、ぶら下げていたサブコマンドが全て無になってしまう仕様？らしい
+# サブコマンドを手動で登録することによって気合で解決しているが、現状ではサブコマンドは1階層まで。
+# つまり、 ${unique_id} {サブコマンド1} 引数...
+# という形のコマンドのみ可
+# とりあえず足りそうなので妥協した。
+
 #コグとして用いるクラス
 # ${unique_id} とそのサブコマンドを記述
 class CharaCog(commands.Cog):
-
     #コンストラクタ
     def __init__(self, bot, pc_unique_id):
         self.bot = bot
@@ -18,7 +23,6 @@ class CharaCog(commands.Cog):
             else:
                 root_command.add_command(c)
 
-        print(root_command.commands)
         print('setup command $' + pc_unique_id)
 
     # コマンドグループのルート
@@ -32,15 +36,7 @@ class CharaCog(commands.Cog):
             await ctx.send( chara['name'] + ' のコマンドっす。\n このコマンドにはサブコマンドが必要っす。')
 
     # あとで手動でサブコマンド化する
-    @commands.commamd()
+    @commands.command()
     async def status(self, ctx, item):
         print('$' + self.pc_unique_id, 'status', item)
-        await ctx.send(cc.chara_data_output(self.pc_unique_id, item))
-
-    @commands.group()
-    async def child1(self, ctx):
-        await ctx.send('これはchild1')
-
-    @commands.command()
-    async def child2(self, ctx):
-        await ctx.send('これはchild2')
+        await ctx.send(cc.chara_dacta_output(self.pc_unique_id, item))
