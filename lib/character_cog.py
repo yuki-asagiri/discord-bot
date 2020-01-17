@@ -32,7 +32,15 @@ class CharaCog(commands.Cog):
             await ctx.send( chara['name'] + ' のコマンドっす。\n このコマンドにはサブコマンドが必要っす。')
 
     # あとで手動でサブコマンド化する
-    @Commands.command()
+    @commands.commamd()
     async def status(self, ctx, item):
         print('$' + self.pc_unique_id, 'status', item)
         await ctx.send(cc.chara_data_output(self.pc_unique_id, item))
+
+    @commands.group()
+    async def child1(self, ctx):
+        await ctx.send('これはchild1')
+
+    @commands.command()
+    async def child2(self, ctx):
+        await ctx.send('これはchild2')
