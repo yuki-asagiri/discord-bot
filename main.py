@@ -23,7 +23,6 @@ class CharaBot(commands.Bot):
     def __init__(self, command_prefix):
         # スーパークラスのコンストラクタ
         super().__init__(command_prefix)
-        self.load_extension('lib.common_commands')
 
     # ログイン時の処理
     async def on_ready(self):
