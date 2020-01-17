@@ -49,14 +49,13 @@ async def on_message(message):
     
     if dc.string_analyze(message.content):
         msg = dc.dice_api_client(message.content)
-        if msg == False:
-            await bot.process_commands(message)
-        else:
-            print(msg[0])
-            dm = await message.author.create_dm()
-            await message.channel.send(msg[0])
-            if msg[1]:
-                await dm.send(msg[0])
+        print(msg[0])
+        dm = await message.author.create_dm()
+        await message.channel.send(msg[0])
+        if msg[1]:
+            await dm.send(msg[0])
+    else:
+        await bot.process_commands(message)
 
 #コマンド処理
 @bot.command()

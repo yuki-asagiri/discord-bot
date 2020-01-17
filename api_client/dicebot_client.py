@@ -4,7 +4,7 @@ import re
 from lib import json_extracter as je
 
 def string_analyze(message):
-    search_ccb = re.search(r'([a-zA-Z]+){3}', message)
+    search_ccb = re.search(r'(b|B|c|C|e|E)(c|C|r|R|s|S)(b|B)', message)
     search_dice = re.search(r'([0-9]+)[dD]([0-9\ ]+)', message)
 
     return true_or_false(search_ccb or search_dice)
