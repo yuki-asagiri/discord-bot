@@ -49,12 +49,12 @@ class CommonCog(commands.Cog):
 
     #コマンド処理
     @commands.command()
-    async def test(ctx):
+    async def test(self, ctx):
         print('$test')
         await ctx.send('ひえー')
 
     @commands.command()
-    async def load(ctx, unique_id, url):
+    async def load(self, ctx, unique_id, url):
         print('$load', unique_id, url)
         if url == '':
             await ctx.send('urlを入力してくださいっす。')
@@ -79,19 +79,19 @@ class CommonCog(commands.Cog):
         print(pc_list)
 
     @commands.command()
-    async def show(ctx, unique_id, item):
+    async def show(self, ctx, unique_id, item):
         print('$show', unique_id, item)
         await ctx.send(cc.chara_data_output(unique_id, item))
 
     # skillコマンドは仮実装（実際はshowコマンドにぶら下げたい）
     @commands.command()
-    async def skill(ctx, unique_id, skillname):
+    async def skill(self, ctx, unique_id, skillname):
         print('$skill', unique_id, skillname)
         await ctx.send(cc.skill_data_output(unique_id, skillname))
 
     # updateコマンドは現時点では増減指定のみ対応
     @commands.command()
-    async def update(ctx, unique_id, item, amount):
+    async def update(self, ctx, unique_id, item, amount):
         print('$update', unique_id, item, amount)
         if(sc.is_initial_sign(amount)):
             sc.status_converter2(item, unique_id, amount)
