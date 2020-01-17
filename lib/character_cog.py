@@ -69,7 +69,7 @@ class CharaCog(commands.Cog):
     async def sroll(self, ctx, skillname):
         print('$' + self.pc_unique_id, 'roll', skillname)
         # まずは技能値を表示
-        await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname))
+        await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname) + '　［シークレットダイス］')
         # 次にダイスロール実施
         skill_value = cc.get_skill_value(self.pc_unique_id, skillname)
         msg = dc.dice_api_client('sccb<=' + skill_value)
