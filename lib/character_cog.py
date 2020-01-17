@@ -1,6 +1,7 @@
 from discord.ext import commands
 from lib import character_controller as cc
 from api_client import dicebot_client as dc
+from lib import status_controller as sc
 
 # ルートコマンドの名前を変更すると、ぶら下げていたサブコマンドが全て無になってしまう仕様？らしい
 # サブコマンドを手動で登録することによって気合で解決しているが、現状ではサブコマンドは1階層まで。
@@ -48,6 +49,16 @@ class CharaCog(commands.Cog):
     async def skill(self, ctx, skillname):
         print('$' + self.pc_unique_id, 'skill', skillname)
         await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname))
+
+    # ステータス増減
+    @commands.command()
+    async def update(self, ctx, item, amount):
+        print('$' + self.pc_unique_id, 'update', item, amount)
+        if(sc.is_initial_sign(amount)):
+            sc.status_converter2(item, self.pc_unique_id, amount)
+        else:
+            sc.status_converter(item, self.pc_unique_id, amount)
+        await ctx.send(cc.chara_data_output(self.pc_unique_id, item))
 
     # スキルロール
     @commands.command()
