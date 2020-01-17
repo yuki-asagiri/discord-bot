@@ -22,11 +22,11 @@ def request_creater(message):
     system = 'Cthulhu'
 
     url = '/v1/diceroll'
-    para = '?system=' + system + '&command=' + message.replace(' ', '')
+    para = '?system=' + system + '&command=' + urllib.parse.quote(message.replace(' ', ''))
 
     fqdn = 'http://' + host + ':' + port + url + para + ''
     print('To request ⇛' + fqdn)
-    return urllib.parse.quote(fqdn)
+    return fqdn
 
 def dice_api_client(message):
     req = request_creater(message)
