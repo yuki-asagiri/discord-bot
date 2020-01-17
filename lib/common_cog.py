@@ -16,7 +16,7 @@ class CommonCog(commands.Cog):
         print('setup command $' + pc_unique_id)
 
     # メッセージに対する反応集
-    @commands.event
+    @commands.Cog.listener()
     async def on_message(message):
         global oumu_flag
         print(message.author.name)
