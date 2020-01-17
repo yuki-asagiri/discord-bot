@@ -19,14 +19,12 @@ class CharaCog(commands.Cog):
     @commands.group()
     async def root(self, ctx):
         # サブコマンドが呼ばれていない場合、メッセージを表示
+        print('$' + self.pc_unique_id)
         if ctx.invoked_subcommand is None:
             chara = cc.get_chara_data(self.pc_unique_id)
             await ctx.send( chara['name'] + ' のコマンドっす。\n このコマンドにはサブコマンドが必要っす。')
 
     @root.command()
-    async def status(self, ctx, *args)
-        print('$' + self.pc_unique_id, 'status', args)
-        if len(args) == 0:
-            await ctx.send(cc.chara_data_output(unique_id, 'all'))
-        else:
-            await ctx.send(cc.chara_data_output(unique_id, args[0]))
+    async def status(self, ctx, item):
+        print('$' + self.pc_unique_id, 'status', item)
+        await ctx.send(cc.chara_data_output(unique_id, item))

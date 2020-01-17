@@ -51,7 +51,7 @@ class CommonCog(commands.Cog):
             if msg[1]:
                 await dm.send(msg[0])
         else:
-            await bot.process_commands(message)
+            await self.bot.process_commands(message)
 
     #コマンド処理
     @commands.command()
