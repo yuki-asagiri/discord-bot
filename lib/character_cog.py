@@ -59,7 +59,7 @@ class CharaCog(commands.Cog):
         skill_value = cc.get_skill_value(self.pc_unique_id, skillname)
         msg = dc.dice_api_client('ccb<=' + skill_value)
         print(msg[0])
-        dm = await message.author.create_dm()
-        await message.channel.send(msg[0])
+        dm = await ctx.author.create_dm()
+        await ctx.send(msg[0])
         if msg[1]:
             await dm.send(msg[0])
