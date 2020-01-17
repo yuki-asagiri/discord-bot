@@ -270,7 +270,6 @@ def chara_data_extracter(chara, unique_id):
 def get_chara_data(unique_id):
     return fc.file_reader(unique_id)
 
-
 def chara_data_output(unique_id, form):
     chara_data = fc.file_reader(unique_id)
     return status_outputer(chara_data, form)
@@ -300,6 +299,10 @@ def status_outputer(data, form):
     print(put_result)
 
     return put_result
+
+def get_status_value(unique_id, form):
+    chara_data = fc.file_reader(unique_id)
+    return chara_data['status'][form]
 
 def skill_data_output(unique_id, skillname):
     chara_data = fc.file_reader(unique_id)
