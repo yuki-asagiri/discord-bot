@@ -9,9 +9,15 @@ class CharaCog(commands.Cog):
     def __init__(self, bot, pc_unique_id):
         self.bot = bot
         self.pc_unique_id = pc_unique_id
+        # 全コマンドのリスト
+        subcommands = self.walk_commands()
+        # ルートコマンド
         commands = self.get_commands()
         for c in commands:
             c.update(name = self.pc_unique_id)
+        for c in subcommands:
+            print(c.qualified_name)
+
         print('setup command $' + pc_unique_id)
 
     # コマンドグループのルート
@@ -27,4 +33,4 @@ class CharaCog(commands.Cog):
     @root.command()
     async def status(self, ctx, item):
         print('$' + self.pc_unique_id, 'status', item)
-        await ctx.send(cc.chara_data_output(unique_id, item))
+        await ctx.send(cc.chara_data_output(self.pc_unique_id, item))
