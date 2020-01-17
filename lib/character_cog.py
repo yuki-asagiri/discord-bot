@@ -12,9 +12,9 @@ class CharaCog(commands.Cog):
 
     # コマンドグループのルート
     # ${unique_id} に対応
-    @commands.group(name = pc_unique_id)
+    @commands.group(name = self.pc_unique_id)
     async def root(self, ctx):
         # サブコマンドが呼ばれていない場合、メッセージを表示
         if ctx.invoked_subcommand is None:
-            chara = cc.get_chara_data(pc_unique_id)
+            chara = cc.get_chara_data(self.pc_unique_id)
             await ctx.send( chara['name'] + ' のコマンドっす。\n このコマンドにはサブコマンドが必要っす。')
