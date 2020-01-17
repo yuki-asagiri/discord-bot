@@ -78,7 +78,7 @@ class CommonCog(commands.Cog):
             await ctx.send('キャラクターを読み込めなかったっす。')
         print(pc_list)
 
-    @Ccommands.command()
+    @commands.command()
     async def show(ctx, unique_id, item):
         print('$show', unique_id, item)
         await ctx.send(cc.chara_data_output(unique_id, item))

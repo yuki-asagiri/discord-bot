@@ -34,11 +34,11 @@ class CharaBot(commands.Bot):
         print('------')
 
         # 一般的なコマンドコグの読み込み
-        self.add_cog(CommonCog(self))
+        self.add_cog(common_cog.CommonCog(self))
         # キャラクターごとのコマンドコグの読み込み
         for unique_id in pc_list:
             try:
-                self.add_cog(CharaCog(self, unique_id))
+                self.add_cog(character_cog.CharaCog(self, unique_id))
             except Exeption:
                 traceback.print_exc()
 
