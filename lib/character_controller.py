@@ -12,9 +12,9 @@ def list_in_keyword(keyword, lolist):
         if i in keyword:
             return True
 
-def list_in_ob(message, lolist):
+def list_in_chara(chara, lolist):
     for i in lolist:
-        if i in message:
+        if chara == i:
             return i
 
 def chara_loader(unique_id):
