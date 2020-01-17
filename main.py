@@ -4,6 +4,7 @@ import traceback
 from lib import character_controller as cc
 from lib import status_controller as sc
 from lib import character_cog
+from lib import common_cog
 from api_client import dicebot_client as dc
 from discord.ext import commands
 
