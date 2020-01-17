@@ -12,7 +12,8 @@ oumu_flag = False
 pc_list = cc.chara_lister()
 status_list = ['full', 'STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU', 'HP', 'MP', 'SAN', 'idea', '幸運', '知識']
 
-#コグとして用いるクラス
+# コグとして用いるクラス
+# 一般的なコマンドを記述
 class CommonCog(commands.Cog):
 
     #コンストラクタ

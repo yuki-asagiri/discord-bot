@@ -2,6 +2,7 @@ from discord.ext import commands
 from lib import character_controller as cc
 
 #コグとして用いるクラス
+# ${unique_id} とそのサブコマンドを記述
 class CharaCog(commands.Cog):
 
     #コンストラクタ
@@ -21,3 +22,11 @@ class CharaCog(commands.Cog):
         if ctx.invoked_subcommand is None:
             chara = cc.get_chara_data(self.pc_unique_id)
             await ctx.send( chara['name'] + ' のコマンドっす。\n このコマンドにはサブコマンドが必要っす。')
+
+    @root.command()
+    async def status(self, ctx, *args)
+        print('$' + self.pc_unique_id, 'status', args)
+        if len(args) == 0:
+            await ctx.send(cc.chara_data_output(unique_id, 'all'))
+        else:
+            await ctx.send(cc.chara_data_output(unique_id, args[0]))
