@@ -35,8 +35,15 @@ class CharaCog(commands.Cog):
             chara = cc.get_chara_data(self.pc_unique_id)
             await ctx.send( chara['name'] + ' のコマンドっす。\n このコマンドにはサブコマンドが必要っす。')
 
-    # あとで手動でサブコマンド化する
+    # 以下、あとで手動でサブコマンド化するので、サブコマンドはcommands.command()でデコレートする。
+    # ステータス表示
     @commands.command()
     async def status(self, ctx, item):
         print('$' + self.pc_unique_id, 'status', item)
         await ctx.send(cc.chara_dacta_output(self.pc_unique_id, item))
+
+    # スキル表示
+    @commands.command()
+    async def skill(self, ctx, skillname):
+        print('$skill', self.pc_unique_id, skillname)
+        await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname))

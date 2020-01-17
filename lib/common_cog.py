@@ -85,16 +85,6 @@ class CommonCog(commands.Cog):
             await ctx.send('キャラクターを読み込めなかったっす。')
         print(pc_list)
 
-    @commands.command()
-    async def show(self, ctx, unique_id, item):
-        print('$show', unique_id, item)
-        await ctx.send(cc.chara_data_output(unique_id, item))
-
-    # skillコマンドは仮実装（実際はshowコマンドにぶら下げたい）
-    @commands.command()
-    async def skill(self, ctx, unique_id, skillname):
-        print('$skill', unique_id, skillname)
-        await ctx.send(cc.skill_data_output(unique_id, skillname))
 
     # updateコマンドは現時点では増減指定のみ対応
     @commands.command()
