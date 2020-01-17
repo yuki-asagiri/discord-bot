@@ -17,7 +17,7 @@ class CommonCog(commands.Cog):
 
     # メッセージに対する反応集
     @commands.Cog.listener()
-    async def on_message(message):
+    async def on_message(self, message):
         global oumu_flag
         print(message.author.name)
 
