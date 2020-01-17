@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import traceback
 from lib import character_controller as cc
 from lib import status_controller as sc
 from api_client import dicebot_client as dc
@@ -27,9 +28,11 @@ async def on_ready():
     print('------')
 
     # キャラクターごとのcogコマンドの用意
-    for unique_id in pc_list
-        self.load_extension(unique_id)
-
+    for unique_id in pc_list:
+        try:
+            self.load_extension(unique_id)
+        except Exeption:
+            traceback.print_exc()
 
 # メッセージに対する反応集
 @bot.event
