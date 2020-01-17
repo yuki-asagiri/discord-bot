@@ -21,9 +21,9 @@ def request_creater(message):
     system = 'Cthulhu'
 
     url = '/v1/diceroll'
-    para = '?system=' + system + '&command=' + message.replace(' ', '')
+    para = '?system=' + system + '&command="' + message.replace(' ', '')
 
-    fqdn = '"http://' + host + ':' + port + url + para + '"'
+    fqdn = 'http://' + host + ':' + port + url + para + '"'
     print('To request ⇛' + fqdn)
     return fqdn
 
