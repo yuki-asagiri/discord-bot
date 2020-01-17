@@ -20,10 +20,16 @@ status_list = ['full', 'STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU', '
 # ログイン時の処理
 @bot.event
 async def on_ready():
+    # ログイン情報
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+
+    # キャラクターごとのcogコマンドの用意
+    for unique_id in pc_list
+        self.load_extension(unique_id)
+
 
 # メッセージに対する反応集
 @bot.event
@@ -33,7 +39,7 @@ async def on_message(message):
 
     if message.author.bot:
         return
-    
+
     if '返事やめて' in message.content:
         msg = '了解っす。'
         oumu_flag = False
@@ -41,12 +47,12 @@ async def on_message(message):
 
     if oumu_flag:
         await message.channel.send(message.content+'、っす。')
- 
+
     if '返事して' in message.content:
         msg = '了解っす。'
         oumu_flag = True
         await message.channel.send(msg)
-    
+
     if dc.string_analyze(message.content):
         msg = dc.dice_api_client(message.content)
         print(msg[0])
@@ -68,8 +74,8 @@ async def load(ctx, unique_id, url):
     print('$load', unique_id, url)
     if url == '':
         await ctx.send('urlを入力してくださいっす。')
-        return 
-    
+        return
+
     # キャラクター保管所からデータを持ってくる
     chara_url = url + '.js'
     chara_dl_bool = cc.chara_data_download(chara_url, unique_id)
@@ -83,6 +89,7 @@ async def load(ctx, unique_id, url):
             pc_list.append(unique_id)
             await ctx.send('以下のキャラデータを保存したっすよ。')
             await ctx.send(cc.chara_data_output(unique_id, 'all'))
+            self.load_extension(unique_id)
     else:
         await ctx.send('キャラクターを読み込めなかったっす。')
     print(pc_list)

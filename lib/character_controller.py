@@ -266,6 +266,11 @@ def chara_data_extracter(chara, unique_id):
     print('Chara_data save now')
     fc.file_writer(new_chara_json, unique_id)
 
+# 単にキャラデータのjsonだけを返す
+def get_chara_data(unique_id):
+    return fc.file_reader(unique_id)
+
+
 def chara_data_output(unique_id, form):
     chara_data = fc.file_reader(unique_id)
     return status_outputer(chara_data, form)
