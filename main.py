@@ -12,12 +12,6 @@ from discord.ext import commands
 with open('bot-token.txt', 'r') as KEY: secret = KEY.readlines()
 token = secret[0].strip()
 
-# 変数定義
-oumu_flag = False
-pc_list = cc.chara_lister()
-status_list = ['full', 'STR', 'CON', 'POW', 'DEX', 'APP', 'SIZ', 'INT', 'EDU', 'HP', 'MP', 'SAN', 'idea', '幸運', '知識']
-
-
 # Botクラス
 class CharaBot(commands.Bot):
     # コンストラクタ
@@ -39,7 +33,7 @@ class CharaBot(commands.Bot):
         for unique_id in pc_list:
             try:
                 self.add_cog(character_cog.CharaCog(self, unique_id))
-            except Exeption:
+            except Excption:
                 traceback.print_exc()
 
 
