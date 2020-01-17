@@ -78,7 +78,7 @@ class CommonCog(commands.Cog):
                 pc_list.append(unique_id)
                 await ctx.send('以下のキャラデータを保存したっすよ。')
                 await ctx.send(cc.chara_data_output(unique_id, 'all'))
-                self.load_extension(unique_id)
+                self.bot.add_cog(character_cog.CharaCog(self.bot, unique_id))
         else:
             await ctx.send('キャラクターを読み込めなかったっす。')
         print(pc_list)
