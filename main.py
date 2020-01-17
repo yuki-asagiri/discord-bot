@@ -77,7 +77,7 @@ async def load(ctx, unique_id, url):
     print(chara_dl_bool)
     if chara_dl_bool:
         print('success!!')
-        if cc.list_in_keyword(unique_id, pc_list):
+        if cc.list_in_chara(unique_id, pc_list):
             print('The '+ unique_id + ' is overwritten')
             await ctx.send(unique_id + 'さんのデータは上書きされるっす。')
         else:
