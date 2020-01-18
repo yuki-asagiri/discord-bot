@@ -26,7 +26,7 @@ def load_charajson(unique_id):
 # ファイルにキャラクターを書き込む
 # 何も返さない
 def save_charajson(unique_id):
-    return return fc.file_writer(character_json, unique_id)
+    return fc.file_writer(character_json, unique_id)
 
 # 保管所フォーマットのjsonをこのbotのchara_jsonフォーマットに変換する
 def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
