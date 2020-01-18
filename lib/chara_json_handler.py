@@ -16,7 +16,7 @@ skill_name_list = {
 }
 
 # 保管所フォーマットのjsonをこのbotのchara_jsonフォーマットに変換する
-def convert_hokanjo_format_to_charajson(hokanjo):
+def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
 
     # 基本的な部分の変換
     charajson = {

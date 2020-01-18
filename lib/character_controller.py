@@ -56,7 +56,7 @@ def chara_data_extracter(chara, unique_id):
     print('キャラデータの保存')
 
     # 基礎ステータスの読み込み
-    new_chara_json = cjh.convert_hokanjo_format_to_charajson(chara)
+    new_chara_json = cjh.convert_hokanjo_format_to_charajson(chara, unique_id)
 
     # キャラデータの保存
     print('Chara_data save now')
