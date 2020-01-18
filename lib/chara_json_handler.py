@@ -56,14 +56,13 @@ def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
     # 独自追加の技能があるかを調べ、ある場合は追加する
     # 独自追加技能の名前はTBAName, TFAName,TAAName, TCAName, TKANameにそれぞれある。
     for group_index, name_group in enumerate(originalskill_name_list):
-        if !(name_group in hokanjo):
-            continue
-        for skill_index, skill_name in enumerate(hokanjo[name_group]):
-            print('orijinal skill > ' + skill_name)
-            skill_json = {
-                "name" : skill_name,
-                "value" : hokanjo[skill_group_list[group_index]][len(skill_name_list[skill_group_list[group_index]])+skill_index]
-            }
-            charajson['skill'][skill_name] = skill_json
+        if name_group in hokanjo:
+            for skill_index, skill_name in enumerate(hokanjo[name_group]):
+                print('orijinal skill > ' + skill_name)
+                skill_json = {
+                    "name" : skill_name,
+                    "value" : hokanjo[skill_group_list[group_index]][len(skill_name_list[skill_group_list[group_index]])+skill_index]
+                }
+                charajson['skill'][skill_name] = skill_json
 
     return charajson
