@@ -3,7 +3,7 @@ import glob
 import json
 import os
 from lib import file_controller as fc
-from lib import chara_json_handler.py as cjh
+from lib import chara_json_handler as cjh
 
 def test():
     print('キャラデータの操作ファイルです')
@@ -46,7 +46,8 @@ def chara_data_download(id_url, unique_id):
         # jsonのフォーマットを整形する
         chara_data_extracter(data, unique_id)
         result = True
-    except:
+    except Exception:
+        traceback.print_exc()
         result = False
     return result
 

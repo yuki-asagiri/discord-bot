@@ -38,6 +38,7 @@ def convert_hokanjo_format_to_charajson(hokanjo):
         "幸運" : hokanjo["NA13"],
         "知識" : hokanjo["NA14"]
       }
+    }
 
     # 基本的なスキルの読み込み
     for skill_group in skill_group_list:
