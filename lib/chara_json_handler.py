@@ -1,4 +1,5 @@
 import json
+import enumarate
 
 # キャラクターデータ保管用のjson操作ファイル
 
@@ -38,14 +39,19 @@ def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
         "幸運" : hokanjo["NA13"],
         "知識" : hokanjo["NA14"]
       }
+      "skill" : {
+      }
     }
 
     # 基本的なスキルの読み込み
     for skill_group in skill_group_list:
         # 各スキルグループごとに、技能名ガン回し
-        for index, skillname in enumarate(skill_name_list[skill_group]):
-            charajson['skill'][skillname]['name'] = skillname
-            charajson['skill'][skillname]['value'] = hokanjo[skillgroup][index]
+        for index, skillname in enumerate(skill_name_list[skill_group]):
+            skill_json = {
+                "name" : skillname,
+                "value" : hokanjo[skillgroup][index]
+            }
+            charajson['skill'][skillname] = skill_json
 
     # 独自追加技能の反映
     # 独自追加の技能があるかを調べ、ある場合は追加する
