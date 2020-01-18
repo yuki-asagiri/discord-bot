@@ -65,4 +65,11 @@ def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
                 }
                 charajson['skill'][skill_name] = skill_json
 
+    # 一部の技能（芸術等）の表示名変更
+    charajson['skill']['運転']['name'] = "運転（" + hokanjo["unten_bunya"] + "）"
+    charajson['skill']['製作']['name'] = "制作（" + hokanjo["seisaku_bunya"] + "）"
+    charajson['skill']['操縦']['name'] = "操縦（" + hokanjo["main_souju_norimono"] + "）"
+    charajson['skill']['母国語']['name'] = "母国語（" + hokanjo["mylang_name"] + "）"
+    charajson['skill']['芸術']['name'] = "芸術（" + hokanjo["geijutu_bunya"] + "）"
+
     return charajson
