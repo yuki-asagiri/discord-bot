@@ -1,5 +1,4 @@
 import json
-import enumarate
 
 # キャラクターデータ保管用のjson操作ファイル
 
@@ -38,7 +37,7 @@ def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
         "idea" : hokanjo["NA12"],
         "幸運" : hokanjo["NA13"],
         "知識" : hokanjo["NA14"]
-      }
+      },
       "skill" : {
       }
     }
@@ -49,7 +48,7 @@ def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
         for index, skillname in enumerate(skill_name_list[skill_group]):
             skill_json = {
                 "name" : skillname,
-                "value" : hokanjo[skillgroup][index]
+                "value" : hokanjo[skill_group][index]
             }
             charajson['skill'][skillname] = skill_json
 
