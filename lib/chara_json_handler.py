@@ -45,15 +45,23 @@ def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
     # 基本的なスキルの読み込み
     for skill_group in skill_group_list:
         # 各スキルグループごとに、技能名ガン回し
-        for index, skillname in enumerate(skill_name_list[skill_group]):
+        for index, skill_name in enumerate(skill_name_list[skill_group]):
             skill_json = {
-                "name" : skillname,
+                "name" : skill_name,
                 "value" : hokanjo[skill_group][index]
             }
-            charajson['skill'][skillname] = skill_json
+            charajson['skill'][skill_name] = skill_json
 
     # 独自追加技能の反映
     # 独自追加の技能があるかを調べ、ある場合は追加する
     # 独自追加技能の名前はTBAName, TFAName,TAAName, TCAName, TKANameにそれぞれある。
+    for group_index, name_group in enumerate(originalskill_name_list):
+        for skill_index, skill_name in enumerate(hokanjo[name_group]):
+            print('orijinal skill > ' + skill_name)
+            skill_json = {
+                "name" : skill_name
+                "value" : hokanjo[skill_group_list[group_index]][len(skill_name_list[skill_group_list[group_index]])+skill_index]
+            }
+            charajson['skill'][skill_name] = skill_json
 
     return charajson
