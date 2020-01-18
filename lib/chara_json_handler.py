@@ -1,6 +1,9 @@
 import json
+from lib import file_controller as fc
 
 # キャラクターデータ保管用のjson操作ファイル
+# 書き込み、値の変更ではここを噛ませる
+# 例えばINTの更新時には技能登録した"アイデア"も更新する等に使える？
 
 # 保管所フォーマットのjsonにおいて、技能値が保存されているキー
 skill_group_list = ['TBAP', 'TFAP', 'TAAP', 'TCAP', 'TKAP']
@@ -14,6 +17,16 @@ skill_name_list = {
     'TCAP' : ['言いくるめ', '信用', '説得', '値切り', '母国語'],
     'TKAP' : ['医学', 'オカルト', '化学', 'クトゥルフ神話', '芸術', '経理', '考古学', 'コンピューター', '心理学', '人類学', '生物学', '地質学', '電子工学', '天文学', '博物学', '物理学', '法律', '薬学', '歴史']
 }
+
+# ファイルからキャラクターを読み込む
+# jsonを返す
+def load_charajson(unique_id):
+    return fc.file_reader(unique_id)
+
+# ファイルにキャラクターを書き込む
+# 何も返さない
+def save_charajson(unique_id):
+    return return fc.file_writer(character_json, unique_id)
 
 # 保管所フォーマットのjsonをこのbotのchara_jsonフォーマットに変換する
 def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
