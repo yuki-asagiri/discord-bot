@@ -20,7 +20,7 @@ skill_name_list = {
 }
 
 def get_name(unique_id):
-    charajson = load_json(unique_id)
+    charajson = load_charajson(unique_id)
     return charajson['name']
 
 # キャラのステータス値を返す
