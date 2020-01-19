@@ -1,5 +1,6 @@
 import json
 from lib import file_controller as fc
+from lib import chara_json_handler as cjh
 
 # キャラクターデータ保管用のjson操作ファイル
 # 書き込み、値の変更ではここを噛ませる
