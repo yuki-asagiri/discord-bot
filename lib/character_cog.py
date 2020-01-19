@@ -58,7 +58,7 @@ class CharaCog(commands.Cog):
 
         before = cjh.get_status_value(self.pc_unique_id, item)
         if(sc.is_initial_sign(amount)):
-            cjh.set_status_value(self.pc_unique_id, item, before + int(amount))
+            cjh.set_status_value(self.pc_unique_id, item, str(int(before) + int(amount))
         else:
             cjh.set_status_value(self.pc_unique_id, item, amount)
         after = cjh.get_status_value(self.pc_unique_id, item)
