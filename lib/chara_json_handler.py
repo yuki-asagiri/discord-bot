@@ -36,13 +36,13 @@ def set_status_value(unique_id, item, value):
 
     # 技能値を更新する必要があるケース = POW, INT, EDU, SAN
     if item == 'POW':
-        charajson['skill']['幸運'] = str(int(charajson['status']['POW']) * 5)
+        charajson['skill']['幸運']['value'] = str(int(charajson['status']['POW']) * 5)
     elif item == 'INT':
-        charajson['skill']['アイデア'] = str(int(charajson['status']['INT']) * 5)
+        charajson['skill']['アイデア']['value']= str(int(charajson['status']['INT']) * 5)
     elif item == 'EDU':
-        charajson['skill']['知識'] = str(int(charajson['status']['EDU']) * 5)
+        charajson['skill']['知識']['value'] = str(int(charajson['status']['EDU']) * 5)
     elif item == 'SAN':
-        charajson['skill']['SAN'] = str(int(charajson['status']['SAN']))
+        charajson['skill']['SAN']['value'] = str(int(charajson['status']['SAN']))
 
     save_charajson(charajson, unique_id)
 
