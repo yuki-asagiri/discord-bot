@@ -18,6 +18,43 @@ skill_name_list = {
     'TKAP' : ['医学', 'オカルト', '化学', 'クトゥルフ神話', '芸術', '経理', '考古学', 'コンピューター', '心理学', '人類学', '生物学', '地質学', '電子工学', '天文学', '博物学', '物理学', '法律', '薬学', '歴史']
 }
 
+# キャラのステータス値を返す
+def get_status_value(unique_id, item):
+    charajson = load_charajson(unique_id)
+    return charajson['status'][item]
+
+# キャラのステータス値を設定
+# 必要に応じて、技能値（＜アイデア＞等）も更新
+def set_status_value(unique_id, item, value):
+    charajson = load_charajson(unique_id)
+    charajson['status'][item] = value
+
+    # 技能値を更新する必要があるケース = POW, INT, EDU, SAN
+    if item == 'POW':
+        charajson['skill']['幸運'] = int(charajson['status']['POW']) * 5
+    elif item == 'INT':
+        charajson['skill']['アイデア'] = int(charajson['status']['INT']) * 5
+    elif item == 'EDU':
+        charajson['skill']['知識'] = int(charajson['status']['EDU']) * 5
+    elif item == 'SAN':
+        charajson['skill']['SAN'] = int(charajson['status']['SAN'])
+
+    save_charajson(unique_id)
+
+
+# キャラの技能値を返す
+def get_skill_value(unique_id, skill_name):
+    charajson = load_charajson(unique_id)
+    return charajson['skill'][skill_namw]['value']
+
+
+# キャラの技能値を設定
+def set_skill_value(unique_id, skill_name, value):
+    charajson = load_charajson(unique_id)
+    charajson['skill'][skill_name]['value'] = value
+    save_charajson(unique_id)
+
+
 # ファイルからキャラクターを読み込む
 # jsonを返す
 def load_charajson(unique_id):
@@ -84,5 +121,15 @@ def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
     charajson['skill']['操縦']['name'] = "操縦（" + hokanjo["main_souju_norimono"] + "）"
     charajson['skill']['母国語']['name'] = "母国語（" + hokanjo["mylang_name"] + "）"
     charajson['skill']['芸術']['name'] = "芸術（" + hokanjo["geijutu_bunya"] + "）"
+
+    # ステータス依存技能の設定
+    luck = {"name" : "幸運", "value" : int(charajson["status"]["POW"]) * 5}
+    charajson['skill']['幸運'] = luck
+    knowledge = {"name" : "知識", "value" : int(charajson["status"]["EDU"]) * 5}
+    charajson['skill']['知識'] = knowledge
+    idea = {"name" : "アイデア", "value" : int(charajson["status"]["INT"]) * 5}
+    charajson['skill']['アイデア'] = idea
+    san = {"name" : "SAN", "value" : int(charajson["status"]["SAN"])}
+    charajson['skill']['SAN'] = san
 
     return charajson
