@@ -55,15 +55,15 @@ class CharaCog(commands.Cog):
     async def update(self, ctx, item, amount):
         print('$' + self.pc_unique_id, 'update', item, amount)
 
-        before = cc.get_status_value(self.pc_unique_id, item)
+        before = cjh.get_status_value(self.pc_unique_id, item)
         if(sc.is_initial_sign(amount)):
-            sc.status_converter2(item, self.pc_unique_id, amount)
+            cjh.set_status_value(self.pc_unique_id, item, before + int(amount))
         else:
-            sc.status_converter(item, self.pc_unique_id, amount)
-        after = cc.get_status_value(self.pc_unique_id, item)
-        data = cc.get_chara_data(self.pc_unique_id)
+            cjh.set_status_value(self.pc_unique_id, item, amount)
+        after = cjh.get_status_value(self.pc_unique_id, item)
+        name = cjh.get_name(self.pc_unique_id)
 
-        await ctx.send('\nPC名 '+data['name']+'\n'+item + ' ' + before + ' → ' + after)
+        await ctx.send('\nPC名 '+ name +'\n' + item + ' ' + before + ' → ' + after)
 
     # スキルロール
     @commands.command()

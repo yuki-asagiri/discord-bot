@@ -18,6 +18,10 @@ skill_name_list = {
     'TKAP' : ['医学', 'オカルト', '化学', 'クトゥルフ神話', '芸術', '経理', '考古学', 'コンピューター', '心理学', '人類学', '生物学', '地質学', '電子工学', '天文学', '博物学', '物理学', '法律', '薬学', '歴史']
 }
 
+def get_name(unique_id):
+    charajson = load_json(unique_id)
+    return charajson['name']
+
 # キャラのステータス値を返す
 def get_status_value(unique_id, item):
     charajson = load_charajson(unique_id)
