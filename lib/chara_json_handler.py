@@ -35,13 +35,13 @@ def set_status_value(unique_id, item, value):
 
     # 技能値を更新する必要があるケース = POW, INT, EDU, SAN
     if item == 'POW':
-        charajson['skill']['幸運'] = int(charajson['status']['POW']) * 5
+        charajson['skill']['幸運'] = str(int(charajson['status']['POW']) * 5)
     elif item == 'INT':
-        charajson['skill']['アイデア'] = int(charajson['status']['INT']) * 5
+        charajson['skill']['アイデア'] = str(int(charajson['status']['INT']) * 5)
     elif item == 'EDU':
-        charajson['skill']['知識'] = int(charajson['status']['EDU']) * 5
+        charajson['skill']['知識'] = str(int(charajson['status']['EDU']) * 5)
     elif item == 'SAN':
-        charajson['skill']['SAN'] = int(charajson['status']['SAN'])
+        charajson['skill']['SAN'] = str(int(charajson['status']['SAN']))
 
     save_charajson(unique_id)
 
@@ -127,13 +127,13 @@ def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
     charajson['skill']['芸術']['name'] = "芸術（" + hokanjo["geijutu_bunya"] + "）"
 
     # ステータス依存技能の設定
-    luck = {"name" : "幸運", "value" : int(charajson["status"]["POW"]) * 5}
+    luck = {"name" : "幸運", "value" : str(int(charajson["status"]["POW"]) * 5)}
     charajson['skill']['幸運'] = luck
-    knowledge = {"name" : "知識", "value" : int(charajson["status"]["EDU"]) * 5}
+    knowledge = {"name" : "知識", "value" : str(int(charajson["status"]["EDU"]) * 5)}
     charajson['skill']['知識'] = knowledge
-    idea = {"name" : "アイデア", "value" : int(charajson["status"]["INT"]) * 5}
+    idea = {"name" : "アイデア", "value" : str(int(charajson["status"]["INT"]) * 5)}
     charajson['skill']['アイデア'] = idea
-    san = {"name" : "SAN", "value" : int(charajson["status"]["SAN"])}
+    san = {"name" : "SAN", "value" : str(int(charajson["status"]["SAN"]))}
     charajson['skill']['SAN'] = san
 
     return charajson
