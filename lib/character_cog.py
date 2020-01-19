@@ -57,8 +57,8 @@ class CharaCog(commands.Cog):
         print('$' + self.pc_unique_id, 'update', item, amount)
 
         before = cjh.get_status_value(self.pc_unique_id, item)
-        if(sc.is_initial_sign(amount)):
-            cjh.set_status_value(self.pc_unique_id, item, str(int(before) + int(amount))
+        if (sc.is_initial_sign(amount)):
+            cjh.set_status_value(self.pc_unique_id, item, str(int(before) + int(amount)))
         else:
             cjh.set_status_value(self.pc_unique_id, item, amount)
         after = cjh.get_status_value(self.pc_unique_id, item)
