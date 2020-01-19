@@ -44,7 +44,7 @@ def set_status_value(unique_id, item, value):
     elif item == 'SAN':
         charajson['skill']['SAN'] = str(int(charajson['status']['SAN']))
 
-    save_charajson(unique_id)
+    save_charajson(charajson, unique_id)
 
 
 # キャラの技能値を返す
@@ -57,7 +57,7 @@ def get_skill_value(unique_id, skill_name):
 def set_skill_value(unique_id, skill_name, value):
     charajson = load_charajson(unique_id)
     charajson['skill'][skill_name]['value'] = value
-    save_charajson(unique_id)
+    save_charajson(charajson, unique_id)
 
 
 # ファイルからキャラクターを読み込む
@@ -67,7 +67,7 @@ def load_charajson(unique_id):
 
 # ファイルにキャラクターを書き込む
 # 何も返さない
-def save_charajson(unique_id):
+def save_charajson(character_json, unique_id):
     return fc.file_writer(character_json, unique_id)
 
 # 保管所フォーマットのjsonをこのbotのchara_jsonフォーマットに変換する
