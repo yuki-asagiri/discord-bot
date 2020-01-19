@@ -2,6 +2,7 @@ from discord.ext import commands
 from lib import character_controller as cc
 from api_client import dicebot_client as dc
 from lib import status_controller as sc
+from lib import chara_json_handler as cjh
 
 # ルートコマンドの名前を変更すると、ぶら下げていたサブコマンドが全て無になってしまう仕様？らしい
 # サブコマンドを手動で登録することによって気合で解決しているが、現状ではサブコマンドは1階層まで。
