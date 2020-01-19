@@ -91,7 +91,8 @@ def convert_hokanjo_format_to_charajson(hokanjo, unique_id):
         "SAN"  : hokanjo["NA11"],
         "idea" : hokanjo["NA12"],
         "幸運" : hokanjo["NA13"],
-        "知識" : hokanjo["NA14"]
+        "知識" : hokanjo["NA14"],
+        "DB" : hokanjo["dmg_bonus"]
       },
       "skill" : {
       }
