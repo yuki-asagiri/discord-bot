@@ -52,7 +52,7 @@ class Character():
 
     # キャラの技能値を返す
     def get_skill_value(self, skillname):
-        return self.skill[skillnamw]['value']
+        return self.skill[skillname]['value']
 
 
     # キャラの技能値を設定
@@ -61,8 +61,8 @@ class Character():
         save_character()
 
     # キャラの技能名（表示名）を返す
-    def get_skill_name(self, skill_name):
-        return self.skill[skill_name]['name']
+    def get_skill_name(self, skillname):
+        return self.skill[skillname]['name']
 
     # ファイルにキャラクターを書き込む
     # 何も返さない
