@@ -128,13 +128,13 @@ class Character():
             self.skill['芸術']['name'] = "芸術（" + hokanjo["geijutu_bunya"] + "）"
 
             # ステータス依存技能の設定
-            luck = {"name" : "幸運", "value" : str(int(charajson["status"]["POW"]) * 5)}
+            luck = {"name" : "幸運", "value" : str(int(self.status["POW"]) * 5)}
             self.skill['幸運'] = luck
-            knowledge = {"name" : "知識", "value" : str(int(charajson["status"]["EDU"]) * 5)}
+            knowledge = {"name" : "知識", "value" : str(self.status["EDU"]) * 5)}
             self.skill['知識'] = knowledge
-            idea = {"name" : "アイデア", "value" : str(int(charajson["status"]["INT"]) * 5)}
+            idea = {"name" : "アイデア", "value" : str(int(self.status["INT"]) * 5)}
             self.skill['アイデア'] = idea
-            san = {"name" : "SAN", "value" : str(int(charajson["status"]["SAN"]))}
+            san = {"name" : "SAN", "value" : str(int(self.status["SAN"]))}
             self.skill['SAN'] = san
 
             self.save_character()
