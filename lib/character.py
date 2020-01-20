@@ -66,7 +66,7 @@ class Character():
 
     # ファイルにキャラクターを書き込む
     # 何も返さない
-    def save_character():
+    def save_character(self):
         print('TODO: オブジェクトのダンプをファイル保存する処理をする')
         return
 
