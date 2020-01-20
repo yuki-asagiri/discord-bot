@@ -39,13 +39,13 @@ class Character():
 
         # 技能値を更新する必要があるケース = POW, INT, EDU, SAN
         if item == 'POW':
-            self.skill['幸運']['value'] = str(int(charajson['status']['POW']) * 5)
+            self.skill['幸運']['value'] = str(int(self.status['POW']) * 5)
         elif item == 'INT':
-            self.skill['アイデア']['value']= str(int(charajson['status']['INT']) * 5)
+            self.skill['アイデア']['value']= str(int(self.status['status']['INT']) * 5)
         elif item == 'EDU':
-            self.skill['知識']['value'] = str(int(charajson['status']['EDU']) * 5)
+            self.skill['知識']['value'] = str(int(self.status['status']['EDU']) * 5)
         elif item == 'SAN':
-            self.skill['SAN']['value'] = str(int(charajson['status']['SAN']))
+            self.skill['SAN']['value'] = str(int(self.status['status']['SAN']))
 
         self.save_character()
 
