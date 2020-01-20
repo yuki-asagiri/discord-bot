@@ -42,7 +42,7 @@ def chara_lister():
 # キャラデータリクエストおよびCharacterインスタンスの作成、リストへの追加
 def chara_data_download(id_url, unique_id):
     print('downloaderの読み込み')
-    print('TODO: [character_controller.py::chara_data_downloader] キャラ周りの再構成に伴い、本メソッドの移動を検討'')
+    print('TODO: [character_controller.py::chara_data_downloader] キャラ周りの再構成に伴い、本メソッドの移動を検討')
     headers = {"content-type": "application/json"}
     req = id_url
     response = requests.get(req, headers=headers)
