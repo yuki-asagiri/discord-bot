@@ -55,7 +55,7 @@ class CharaCog(commands.Cog):
     @commands.command()
     async def update(self, ctx, item, amount):
         print('$' + self.pc_unique_id, 'update', item, amount)
-        chara = cc.get_character(self.unique_id)
+        chara = cc.get_character(self.pc_unique_id)
         before = chara.get_status_value(item)
         if (sc.is_initial_sign(amount)):
             chara.set_status_value(item, str(int(before) + int(amount)))
@@ -71,7 +71,7 @@ class CharaCog(commands.Cog):
     async def roll(self, ctx, skillname):
         print('$' + self.pc_unique_id, 'roll', skillname)
         # まずは技能値を表示
-        chara = cc.get_character(self.unique_id)
+        chara = cc.get_character(self.pc_unique_id)
         await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname))
         # 次にダイスロール実施
         skill_value = chara.get_skill_value(skillname)
@@ -87,7 +87,7 @@ class CharaCog(commands.Cog):
     async def sroll(self, ctx, skillname):
         print('$' + self.pc_unique_id, 'roll', skillname)
         # まずは技能値を表示
-        chara = cc.get_character(self.unique_id)
+        chara = cc.get_character(self.pc_unique_id)
         await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname) + '　［シークレットダイス］')
         # 次にダイスロール実施
         skill_value = chara.get_skill_value(skillname)
