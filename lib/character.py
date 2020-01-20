@@ -73,6 +73,10 @@ class Character():
     # コンストラクタ
     # hokanjo: 保管所形式のjsonデータ
     def __init__(self, unique_id, hokanjo):
+
+            self.status = {}
+            self.skill = {}
+
             # 基本的な部分の変換
             self.unique_id = unique_id # 一応こっちにも持たせているが必要かどうかは不明
             self.name = hokanjo['pc_name']
