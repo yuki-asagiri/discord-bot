@@ -71,6 +71,7 @@ class CommonCog(commands.Cog):
         chara_url = url + '.js'
         chara_dl_bool = cc.chara_data_download(chara_url, unique_id)
         print(chara_dl_bool)
+
         if chara_dl_bool:
             print('success!!')
             if cc.list_in_chara(unique_id, pc_list):

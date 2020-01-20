@@ -17,7 +17,7 @@ class CharaCog(commands.Cog):
     def __init__(self, bot, pc_unique_id):
         self.bot = bot
         self.pc_unique_id = pc_unique_id
-        # ルートコマンド
+        # ルートコマンドの設定とそれ以外のコマンドのサブコマンド化
         commands = self.get_commands()
         for c in commands:
             if c.name == 'root':
@@ -35,8 +35,8 @@ class CharaCog(commands.Cog):
         # サブコマンドが呼ばれていない場合、メッセージを表示
         print('$' + self.pc_unique_id)
         if ctx.invoked_subcommand is None:
-            chara = cc.get_chara_data(self.pc_unique_id)
-            await ctx.send( chara['name'] + ' のコマンドっす。\n このコマンドにはサブコマンドが必要っす。')
+            chara = cc.get_character(self.pc_unique_id)
+            await ctx.send( chara.get_name() + ' のコマンドっす。\n このコマンドにはサブコマンドが必要っす。')
 
     # 以下、あとで手動でサブコマンド化するので、サブコマンドはcommands.command()でデコレートする。
     # ステータス表示
@@ -55,14 +55,14 @@ class CharaCog(commands.Cog):
     @commands.command()
     async def update(self, ctx, item, amount):
         print('$' + self.pc_unique_id, 'update', item, amount)
-
-        before = cjh.get_status_value(self.pc_unique_id, item)
+        chara = cc.get_character(self.unique_id)
+        before = chara.get_status_value(item)
         if (sc.is_initial_sign(amount)):
-            cjh.set_status_value(self.pc_unique_id, item, str(int(before) + int(amount)))
+            chara.set_status_value(item, str(int(before) + int(amount)))
         else:
-            cjh.set_status_value(self.pc_unique_id, item, amount)
-        after = cjh.get_status_value(self.pc_unique_id, item)
-        name = cjh.get_name(self.pc_unique_id)
+            chara.set_status_value(item, amount)
+        after = chara.get_status_value(item)
+        name = chara.get_name()
 
         await ctx.send('\nPC名 '+ name +'\n' + item + ' ' + before + ' → ' + after)
 
@@ -71,9 +71,10 @@ class CharaCog(commands.Cog):
     async def roll(self, ctx, skillname):
         print('$' + self.pc_unique_id, 'roll', skillname)
         # まずは技能値を表示
+        chara = cc.get_character(self.unique_id)
         await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname))
         # 次にダイスロール実施
-        skill_value = cc.get_skill_value(self.pc_unique_id, skillname)
+        skill_value = chara.get_skill_value(skillname)
         msg = dc.dice_api_client('ccb<=' + skill_value)
         print(msg[0])
         dm = await ctx.author.create_dm()
@@ -86,9 +87,10 @@ class CharaCog(commands.Cog):
     async def sroll(self, ctx, skillname):
         print('$' + self.pc_unique_id, 'roll', skillname)
         # まずは技能値を表示
+        chara = cc.get_character(self.unique_id)
         await ctx.send(cc.skill_data_output(self.pc_unique_id, skillname) + '　［シークレットダイス］')
         # 次にダイスロール実施
-        skill_value = cc.get_skill_value(self.pc_unique_id, skillname)
+        skill_value = chara.get_skill_value(skillname)
         msg = dc.dice_api_client('sccb<=' + skill_value)
         print(msg[0])
         dm = await ctx.author.create_dm()

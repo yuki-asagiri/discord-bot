@@ -15,9 +15,15 @@ class Character():
     }
 
 
+    # 将来的な拡張（初期値と成長/増減分個別管理など）を考慮してセッター/ゲッターにした
+
     # キャラ名を返す
-    def get_name(self, unique_id):
+    def get_name(self):
         return self.name
+
+    # キャラのunique_idを返す
+    def get_unique_id(self):
+        return self.unique_id
 
     # キャラのステータス値を返す
     def get_status_value(self, item):
@@ -45,15 +51,19 @@ class Character():
 
 
     # キャラの技能値を返す
-    def get_skill_value(unique_id, skill_name):
-        return self.skill[skill_namw]['value']
+    def get_skill_value(self, skillname):
+        return self.skill[skillnamw]['value']
 
 
     # キャラの技能値を設定
-    def set_skill_value(unique_id, skill_name, value):
-        self.skill[skill_name]['value'] = value
+    def set_skill_value(self, skillname, value):
+        self.skill[skillname]['value'] = value
         save_character()
-        
+
+    # キャラの技能名（表示名）を返す
+    def get_skill_name(self, skill_ame):
+        return self.skill[skillname]['name']
+
     # ファイルにキャラクターを書き込む
     # 何も返さない
     def save_character():
@@ -122,3 +132,5 @@ class Character():
             self.skill['アイデア'] = idea
             san = {"name" : "SAN", "value" : str(int(charajson["status"]["SAN"]))}
             self.skill['SAN'] = san
+
+            self.save_character()
