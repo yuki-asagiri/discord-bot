@@ -4,7 +4,6 @@ import json
 import os
 import traceback
 from lib import file_controller as fc
-from lib import chara_json_handler as cjh
 from lib import character
 
 character_list = {}
