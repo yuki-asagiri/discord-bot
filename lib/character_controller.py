@@ -83,7 +83,7 @@ def status_outputer(unique_id, form):
     chara = get_character(unique_id)
     if form == 'all':
         put_result = ('\nPC名 '+ chara.get_name() +'\n'
-                        'ID '+ chara.unique_id() +'\n'
+                        'ID '+ chara.get_unique_id() +'\n'
                         'STR  '+ chara.get_status_value('STR') +'\n'
                         'CON  '+ chara.get_status_value('CON') +'\n'
                         'POW  '+ chara.get_status_value('POW') +'\n'
@@ -96,8 +96,8 @@ def status_outputer(unique_id, form):
                         'MP   '+ chara.get_status_value('MP') +'\n'
                         'SAN  '+ chara.get_status_value('SAN') +'\n'
                         'idea '+ chara.get_status_value('idea') +'\n'
-                        '幸運 '+ chara.get_status_value('幸運') +'\n'
-                        '知識 '+ chara.get_status_value('知識') )
+                        '幸運  '+ chara.get_status_value('幸運') +'\n'
+                        '知識  '+ chara.get_status_value('知識') )
 
     else:
         status = form
