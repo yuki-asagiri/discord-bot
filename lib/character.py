@@ -92,10 +92,10 @@ class Character():
             self.status['HP'] = hokanjo['NA9']
             self.status['MP'] = hokanjo['NA10']
             self.status['SAN'] = hokanjo['NA11']
-            self.status['IDEA'] = hokanjo['NA12']
-            self.status['幸運'] = hokanjo['NA1']
-            self.status['知識'] = hokanjo['NA1']
-            self.status['DB'] = hokanjo['NA1']
+            self.status['idea'] = hokanjo['NA12']
+            self.status['幸運'] = hokanjo['NA13']
+            self.status['知識'] = hokanjo['NA14']
+            self.status['DB'] = hokanjo['dmg_bonus']
 
             # 基本的なスキルの読み込み
             for skill_group in Character.skill_group_list:
