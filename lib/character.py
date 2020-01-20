@@ -41,11 +41,11 @@ class Character():
         if item == 'POW':
             self.skill['幸運']['value'] = str(int(self.status['POW']) * 5)
         elif item == 'INT':
-            self.skill['アイデア']['value']= str(int(self.status['status']['INT']) * 5)
+            self.skill['アイデア']['value']= str(int(self.status['INT']) * 5)
         elif item == 'EDU':
-            self.skill['知識']['value'] = str(int(self.status['status']['EDU']) * 5)
+            self.skill['知識']['value'] = str(int(self.status['EDU']) * 5)
         elif item == 'SAN':
-            self.skill['SAN']['value'] = str(int(self.status['status']['SAN']))
+            self.skill['SAN']['value'] = str(int(self.status['SAN']))
 
         self.save_character()
 
