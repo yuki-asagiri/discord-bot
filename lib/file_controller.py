@@ -12,7 +12,7 @@ def file_writer(character_class):
 
     print('TODO: [file_controller.py::file_writer] ファイルオープン時のエラーハンドリング')
     f = open(data_path, 'wb')
-    pickel.dump(character_class, f)
+    pickle.dump(character_class, f)
     f.close
 
     print('write success')
@@ -26,8 +26,8 @@ def file_reader(unique_id):
         return 'キャラクターがいません'
     else:
         print('TODO: [file_controller.py::file_reader] ファイルオープン時のエラーハンドリング')
-        f = pickel.load(data_path, 'rb')
-        chara_data = pickel.load(f)
+        f = pickle.load(data_path, 'rb')
+        chara_data = pickle.load(f)
     print('read success')
 
     return chara_data
