@@ -27,13 +27,16 @@ def chara_loader(unique_id):
 def chara_saver(character_json, unique_id):
     return fc.file_writer(character_json, unique_id)
 
+# キャラクターのステータスデータ読み込み、およびキャラ名のリスト作成
 def chara_lister():
-    print('TODO: [character_controller.py::chara_lister()] キャラクターデータの保管形式変更に伴い、読み込み方も直し、関数の場所移動。') # ファイル名から登録済みunique_idのリストを作っているだけなのでこのまま再利用可能想定
+    print('TODO: [character_controller.py::chara_lister()] 関数の場所移動を検討。') # ファイル名から登録済みunique_idのリストを作っているだけなのでこのまま再利用可能想定
     dir_path = 'path/chara_data/'
     file_list = glob.glob(dir_path+'*')
     pc_name_list = []
     for file_name in file_list:
-       pc_name_list.append(file_name.split('.')[0].split('/')[2])
+        unique_id = file_name.split('.')[0].split('/')[2]
+        character_list[unique_id] = fc.file_reader(unique_id)
+        pc_name_list.append(unique_id)
     print(pc_name_list)
 
     return pc_name_list

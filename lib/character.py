@@ -1,3 +1,4 @@
+from lib import file_controller as fc
 
 class Character():
     # クラス変数
@@ -67,7 +68,7 @@ class Character():
     # ファイルにキャラクターを書き込む
     # 何も返さない
     def save_character(self):
-        print('TODO: オブジェクトのダンプをファイル保存する処理をする')
+        fc.file_writer(self)
         return
 
     # コンストラクタ
