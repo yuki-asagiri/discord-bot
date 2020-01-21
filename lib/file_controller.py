@@ -26,7 +26,7 @@ def file_reader(unique_id):
         return 'キャラクターがいません'
     else:
         print('TODO: [file_controller.py::file_reader] ファイルオープン時のエラーハンドリング')
-        f = pickle.open(data_path, 'rb')
+        f = open(data_path, 'rb')
         chara_data = pickle.load(f)
     print('read success')
 
