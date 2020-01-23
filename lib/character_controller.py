@@ -67,8 +67,8 @@ def sort_by_status(item):
 
     sorted_character_list = OrderedDict(sorted(character_list.items(), key=lambda chara: chara[1].get_status_value(item)))
 
-    for chara in sorted_character_list:
-        message = message + status_outputer(chara[1].get_unique_id(), item) + '\n'
+    for chara in sorted_character_list.values():
+        message = message + status_outputer(chara.get_unique_id(), item) + '\n'
     return message
 
 # 単にCharacterインスタンスを返す
