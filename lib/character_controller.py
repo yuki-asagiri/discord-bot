@@ -64,8 +64,10 @@ def chara_data_download(id_url, unique_id):
 def sort_by_status(item):
     sorted_character_list = sorted(character_list.values(), key=lambda chara: chara.get_status_value(item))
 
+    message = item + '順ソート\n'
+
     for chara in sorted_character_list:
-        message = message + status_outputer(chara.get_unique_id, item) + '\n'
+        message = status_outputer(chara.get_unique_id, item) + '\n'
     return message
 
 # 単にCharacterインスタンスを返す
