@@ -3,11 +3,12 @@ import glob
 import json
 import os
 import traceback
+from collections import OrderedDict
 from lib import file_controller as fc
 from lib import character
 
 # キャラクタークラスのインスタンスのリスト
-character_list = {}
+character_list = OrderedDict()
 
 def test():
     print('キャラデータの操作ファイルです')
@@ -64,7 +65,9 @@ def chara_data_download(id_url, unique_id):
 def sort_by_status(item):
     message = item + '順ソート\n'
 
-    for chara in character_list.sort(character_list.values(), key=lambda chara: chara.get_status_value(item)):
+    sorted_character_list = OrderedDict(sorted(character_list.items(), key=lambda chara: chara.get_status_value(item)))
+
+    for chara in sorted_character_list:
         message = message + status_outputer(chara.get_unique_id(), item) + '\n'
     return message
 
