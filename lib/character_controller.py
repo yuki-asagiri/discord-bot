@@ -6,6 +6,7 @@ import traceback
 from lib import file_controller as fc
 from lib import character
 
+# キャラクタークラスのインスタンスのリスト
 character_list = {}
 
 def test():
@@ -59,17 +60,12 @@ def chara_data_download(id_url, unique_id):
         result = False
     return result
 
-# 使用しなくなる想定
-def chara_data_extracter(chara, unique_id):
-    print('TODO: [character_controller.py::chara_data_extracter()] 本メソッドは未使用となる想定')
-    print('キャラデータの保存')
-
-    # 基礎ステータスの読み込み
-    new_chara_json = cjh.convert_hokanjo_format_to_charajson(chara, unique_id)
-
-    # キャラデータの保存
-    print('Chara_data save now')
-    fc.file_writer(new_chara_json, unique_id)
+# character_listを指定のステータス順にソートし、表示するメッセージを返す
+def sort_by_status(item):
+    character_list = sorted(character_list, key=lambda s: s.get_status_value(item))
+    for chara in character_list:
+        message = message + status_outputer(chara.get_unique_id, item) + '\n'
+    return message
 
 # 単にCharacterインスタンスを返す
 def get_character(unique_id):

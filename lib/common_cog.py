@@ -85,3 +85,8 @@ class CommonCog(commands.Cog):
         else:
             await ctx.send('キャラクターを読み込めなかったっす。')
         print(pc_list)
+
+    @commands.command()
+    async def list(self, ctx, item):
+        print('$sort', item)
+        await ctx.send(cc.sort_by_status(item))
