@@ -67,7 +67,7 @@ def sort_by_status(item):
     message = item + '順ソート\n'
 
     for chara in sorted_character_list:
-        message = status_outputer(chara.get_unique_id, item) + '\n'
+        message = status_outputer(chara.get_unique_id(), item) + '\n'
     return message
 
 # 単にCharacterインスタンスを返す
