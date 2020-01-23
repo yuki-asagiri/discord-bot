@@ -65,7 +65,7 @@ def chara_data_download(id_url, unique_id):
 def sort_by_status(item):
     message = item + '順ソート\n'
 
-    sorted_character_list = OrderedDict(sorted(character_list.items(), key=lambda chara: chara[1].get_status_value(item)), reverse=True)
+    sorted_character_list = OrderedDict(sorted(character_list.items(), key=lambda chara: chara[1].get_status_value(item), reverse=True))
 
     for chara in sorted_character_list.values():
         message = message + status_outputer(chara.get_unique_id(), item) + '\n'
