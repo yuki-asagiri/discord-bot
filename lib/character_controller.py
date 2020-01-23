@@ -62,7 +62,7 @@ def chara_data_download(id_url, unique_id):
 
 # character_listを指定のステータス順にソートし、表示するメッセージを返す
 def sort_by_status(item):
-    sortedf_character_list = sorted(character_list, key=lambda s: s.get_status_value(item))
+    sortedf_character_list = sorted(character_list, key=lambda c: c.get_status_value(item))
     for chara in sorted_character_list:
         message = message + status_outputer(chara.get_unique_id, item) + '\n'
     return message
