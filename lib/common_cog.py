@@ -86,7 +86,24 @@ class CommonCog(commands.Cog):
             await ctx.send('キャラクターを読み込めなかったっす。')
         print(pc_list)
 
+    # 一覧表示系統のコマンド
     @commands.command()
-    async def list(self, ctx, item):
-        print('$sort', item)
-        await ctx.send(cc.sort_by_status(item))
+    async def show(self, ctx, command):
+        print('$show', command)
+        # コマンドの分岐
+        # ステータス指定 → そのステータスのみ表示
+        # 'battle' → DEX, HP, MP, SAN
+        if command == `battle`:
+            # DEX順ソートした上で、諸々の情報表示
+            sorted_character_list = cc.sort_by_status('DEX')
+            message = '戦闘用リスト\n'
+            for character in sorted_character_list:
+                message = message + chara.get_name() + ' DEX: ' + chara.get_status_value('DEX') + ' HP: ' + chara.get_status_value('HP') + '/' + chara.get_status_value('MAXHP') + ' MP: ' + chara.get_status_value('MP') + '/' + chara.get_status_value('MAXMP') + ' SAN: ' + chara.get_status_value('SAN') + '\n'
+            await ctx.send(message)
+
+        else:
+            sorted_character_list = cc.sort_by_status(command)
+            message = item + '順ソート\n'
+            for character in sorted_character_list:
+                message = message + status_outputer(chara.get_unique_id(), item) + '\n'
+            await ctx.send(message)
