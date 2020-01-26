@@ -105,5 +105,5 @@ class CommonCog(commands.Cog):
             sorted_character_list = cc.sort_by_status(command)
             message = command + '順ソート\n'
             for character in sorted_character_list:
-                message = message + cc.status_outputer(chara.get_unique_id(), item) + '\n'
+                message = message + cc.status_outputer(character.get_unique_id(), item) + '\n'
             await ctx.send(message)
