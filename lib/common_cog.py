@@ -93,7 +93,7 @@ class CommonCog(commands.Cog):
         # コマンドの分岐
         # ステータス指定 → そのステータスのみ表示
         # 'battle' → DEX, HP, MP, SAN
-        if command == `battle`:
+        if command == 'battle':
             # DEX順ソートした上で、諸々の情報表示
             sorted_character_list = cc.sort_by_status('DEX')
             message = '戦闘用リスト\n'
