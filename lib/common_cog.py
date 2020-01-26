@@ -97,13 +97,13 @@ class CommonCog(commands.Cog):
             # DEX順ソートした上で、諸々の情報表示
             sorted_character_list = cc.sort_by_status('DEX')
             message = '戦闘用リスト\n'
-            for character in sorted_character_list:
+            for character in sorted_character_list.values():
                 message = message + chara.get_name() + ' DEX: ' + chara.get_status_value('DEX') + ' HP: ' + chara.get_status_value('HP') + '/' + chara.get_status_value('MAXHP') + ' MP: ' + chara.get_status_value('MP') + '/' + chara.get_status_value('MAXMP') + ' SAN: ' + chara.get_status_value('SAN') + '\n'
             await ctx.send(message)
 
         else:
             sorted_character_list = cc.sort_by_status(command)
             message = command + '順ソート\n'
-            for character in sorted_character_list:
+            for character in sorted_character_list.values():
                 message = message + cc.status_outputer(character.get_unique_id(), item) + '\n'
             await ctx.send(message)
