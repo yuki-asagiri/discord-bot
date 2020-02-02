@@ -98,7 +98,7 @@ class CommonCog(commands.Cog):
             sorted_character_list = cc.sort_by_status('DEX')
             message = '戦闘用リスト\n'
             for character in sorted_character_list.values():
-                message = message + character.get_name() + ' DEX: ' + character.get_status_value('DEX') + ' HP: ' + character.get_status_value('HP') + '/' + character.get_status_value('MAXHP') + ' MP: ' + character.get_status_value('MP') + '/' + character.get_status_value('MAXMP') + ' SAN: ' + character.get_status_value('SAN') + '\n'
+                message = message + character.get_name() + ' | DEX: ' + character.get_status_value('DEX') + ' | HP: ' + character.get_status_value('HP') + '/' + character.get_status_value('MAXHP') + ' | MP: ' + character.get_status_value('MP') + '/' + character.get_status_value('MAXMP') + ' | SAN: ' + character.get_status_value('SAN') + '\n'
             await ctx.send(message)
 
         else:
