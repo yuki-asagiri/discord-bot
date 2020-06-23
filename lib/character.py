@@ -53,6 +53,7 @@ class Character():
 
     # キャラの技能値を返す
     def get_skill_value(self, skillname):
+        print(self.name + ':' + skillname + ' ' + self.skill[skillname]['value'])
         return self.skill[skillname]['value']
 
 
