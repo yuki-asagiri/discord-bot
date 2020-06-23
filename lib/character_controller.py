@@ -8,6 +8,7 @@ from lib import file_controller as fc
 from lib import character
 
 # キャラクタークラスのインスタンスのリスト
+# unique_idをkey、Characterオブジェクトをvalueとして持つ順序保証リスト
 character_list = OrderedDict()
 
 def test():
@@ -64,12 +65,7 @@ def chara_data_download(id_url, unique_id):
 # character_listを指定のステータス順にソートし、ソート済みのリストを返す
 def sort_by_status(item):
     message = item + '順ソート\n'
-
-    sorted_character_list = OrderedDict(sorted(character_list.items(), key=lambda chara: chara[1].get_status_value(item), reverse=True))
-
-    # for chara in sorted_character_list.values():
-        # message = message + status_outputer(chara.get_unique_id(), item) + '\n'
-    # return message
+    sorted_character_list = OrderedDict(sorted(character_list.items(), key=lambda  chara:int(chara[1].get_status_value(item)), reverse=True))
 
     return sorted_character_list
 

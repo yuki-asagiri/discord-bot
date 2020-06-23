@@ -89,14 +89,14 @@ class CommonCog(commands.Cog):
 
     # 一覧表示系統のコマンド
     @commands.command()
-    async def show(self, ctx, command):
-        print('$show', command)
+    async def list(self, ctx, command):
+        print('$list', command)
         # コマンドの分岐
         # ステータス指定 → そのステータスのみ表示
         # 'battle' → DEX, HP, MP, SAN
         if command == 'battle':
             # DEX順ソートした上で、諸々の情報表示
-            sorted_character_list = OrderedDict(cc.sort_by_status('DEX'))
+            sorted_character_list = cc.sort_by_status('DEX')
             message = '戦闘用リスト\n'
             for character in sorted_character_list.values():
                 message = message + character.get_name() + ' | DEX: ' + character.get_status_value('DEX') + ' | HP: ' + character.get_status_value('HP') + '/' + character.get_status_value('MAXHP') + ' | MP: ' + character.get_status_value('MP') + '/' + character.get_status_value('MAXMP') + ' | SAN: ' + character.get_status_value('SAN') + '\n'
