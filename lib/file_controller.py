@@ -5,8 +5,8 @@ import json
 def test():
     print('ファイルの操作ファイル')
 
-def file_writer(character_class):
-    dir_path = 'path/chara_data/'
+def file_writer(character_class, path):
+    dir_path = path
     chara_name = character_class.get_unique_id() + '.chara'
     data_path = dir_path + chara_name
 
@@ -17,8 +17,8 @@ def file_writer(character_class):
 
     print('write success')
 
-def file_reader(unique_id):
-    dir_path = 'path/chara_data/'
+def file_reader(unique_id, path):
+    dir_path = path
     chara_name = str(unique_id) + '.chara'
     data_path = dir_path + chara_name
 
@@ -32,8 +32,8 @@ def file_reader(unique_id):
 
     return chara_data
 
-def file_json_deleter(character_class):
-    dir_path = 'path/chara_data/'
+def file_json_deleter(character_class, path):
+    dir_path = path
     chara_name = character_class.get_unique_id() + '.chara'
     data_path = dir_path + chara_name
 

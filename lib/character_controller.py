@@ -7,6 +7,9 @@ from collections import OrderedDict
 from lib import file_controller as fc
 from lib import character
 
+# 読み込むシナリオ名
+scenario_title = 'sample'
+
 # キャラクタークラスのインスタンスのリスト
 # unique_idをkey、Characterオブジェクトをvalueとして持つ順序保証リスト
 character_list = OrderedDict()
@@ -25,20 +28,22 @@ def list_in_chara(chara, lolist):
             return i
 
 def chara_loader(unique_id):
-    return fc.file_reader(unique_id)
+    dir_path = 'path/' + scenario_title + '/chara_data/'
+    return fc.file_reader(unique_id, dir_path)
 
 def chara_saver(character_json, unique_id):
-    return fc.file_writer(character_json, unique_id)
+    dir_path = 'path/' + scenario_title + '/chara_data/'
+    return fc.file_writer(character_json, unique_id, dir_path)
 
 # キャラクターのステータスデータ読み込み、およびキャラ名のリスト作成
 def chara_lister():
     print('TODO: [character_controller.py::chara_lister()] 関数の場所移動を検討。') # ファイル名から登録済みunique_idのリストを作っているだけなのでこのまま再利用可能想定
-    dir_path = 'path/chara_data/'
+    dir_path = 'path/' + scenario_title + '/chara_data/'
     file_list = glob.glob(dir_path+'*')
     pc_name_list = []
     for file_name in file_list:
-        unique_id = file_name.split('.')[0].split('/')[2]
-        character_list[unique_id] = fc.file_reader(unique_id)
+        unique_id = file_name.split('.')[0].split('/')[3]
+        character_list[unique_id] = fc.file_reader(unique_id, dir_path)
         pc_name_list.append(unique_id)
     print(pc_name_list)
 

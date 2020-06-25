@@ -61,6 +61,24 @@ class CommonCog(commands.Cog):
         print('$test')
         await ctx.send('ひえー')
 
+    @commands.group()
+    async def scenario(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send('シナリオ名：' + cc.scenario_title)
+
+    @scenario.command()
+    async def make(ctx, title):
+        await ctx.send('シナリオ用のデータが作成される予定だけど未実装っすよ')
+
+    @scenario.command()
+    async def load(ctx, title):
+        await ctx.send('シナリオ用のデータが読み込まれる予定だけど未実装っすよ')
+
+    @scenario.command()
+    async def list(ctx):
+        await ctx.send('シナリオの一覧が表示される予定だけど未実装っすよ')
+
+
     @commands.command()
     async def load(self, ctx, unique_id, url):
         print('$load', unique_id, url)
